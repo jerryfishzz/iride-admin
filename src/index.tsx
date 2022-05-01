@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// New way to create the root defferent from 17 and previous
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container!); // container! is for typescript
 root.render(
   <React.StrictMode>
     <App />
