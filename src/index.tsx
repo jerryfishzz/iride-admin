@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Paperbase from './Paperbase';
 import reportWebVitals from './reportWebVitals';
 
 // New way to create the root defferent from 17 and previous
@@ -9,7 +10,8 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container!); // container! is for typescript
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <Paperbase />
   </React.StrictMode>
 );
 
