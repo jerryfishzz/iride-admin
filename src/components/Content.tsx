@@ -10,7 +10,8 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { Box } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material';
 
 export default function Content() {
   return (
@@ -105,12 +106,57 @@ export default function Content() {
           noValidate
           autoComplete="off"
         >
-          <TextField 
-            id="subtitle"
-            label="Subtitle"
-            variant="standard"
-            fullWidth 
-          />
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="subtitle-content"
+              id="subtitle-header"
+            >
+              <Typography>SUBTITLE</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <TextField 
+                id="subtitle"
+                label="Subtitle"
+                variant="standard"
+                fullWidth 
+              />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="fit-content"
+              id="fit-header"
+            >
+              <Typography>FIT</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <TextField 
+                id="fit"
+                label="Fit"
+                variant="standard"
+                fullWidth 
+              />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="sizing-content"
+              id="sizing-header"
+            >
+              <Typography>SIZING</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <TextField 
+                id="sizing"
+                label="Sizing"
+                variant="standard"
+                fullWidth 
+              />
+            </AccordionDetails>
+          </Accordion>
         </Box>
 
 
