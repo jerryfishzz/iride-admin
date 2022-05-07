@@ -1,17 +1,17 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import { Box } from '@mui/material';
-import AccordionInput from './AccordionInput';
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Tooltip from '@mui/material/Tooltip'
+import IconButton from '@mui/material/IconButton'
+import SearchIcon from '@mui/icons-material/Search'
+import RefreshIcon from '@mui/icons-material/Refresh'
+import { Box } from '@mui/material'
+import AccordionInput from './AccordionInput'
 
 export default function Content() {
   return (
@@ -57,8 +57,6 @@ export default function Content() {
         </Typography>
       </Paper>
 
-
-
       <Paper sx={{ maxWidth: 936, margin: 'auto', overflow: 'hidden' }}>
         <AppBar
           position="static"
@@ -96,11 +94,10 @@ export default function Content() {
           </Toolbar>
         </AppBar>
 
-
         <Box
           component="form"
           sx={{
-            my: 5, 
+            my: 5,
             mx: 2,
           }}
           noValidate
@@ -110,9 +107,7 @@ export default function Content() {
           <AccordionInput title="fit" />
           <AccordionInput title="sizing" />
         </Box>
-
-
       </Paper>
     </>
-  );
+  )
 }
