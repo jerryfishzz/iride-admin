@@ -14,6 +14,14 @@ import { Box } from '@mui/material'
 import AccordionInput from './AccordionInput'
 
 export default function Content() {
+  const [content, setContent] = React.useState<string>('men sizing')
+
+  const handleChangeContent = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    const newContent = `New Content ${Math.random()}`
+    setContent(newContent)
+  }
+
   return (
     <>
       <Paper sx={{ maxWidth: 936, margin: 'auto', overflow: 'hidden' }}>
@@ -105,7 +113,9 @@ export default function Content() {
         >
           <AccordionInput title="subtitle" />
           <AccordionInput title="fit" />
-          <AccordionInput title="sizing" content="men sizing" />
+          <AccordionInput title="sizing" content={content} />
+
+          <Button onClick={handleChangeContent}>Change the content</Button>
         </Box>
       </Paper>
     </>

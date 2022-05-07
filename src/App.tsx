@@ -65,9 +65,9 @@ theme = {
     },
     MuiButton: {
       styleOverrides: {
-        root: {
-          textTransform: 'none',
-        },
+        // root: {
+        //   textTransform: 'none',
+        // },
         contained: {
           boxShadow: 'none',
           '&:active': {
