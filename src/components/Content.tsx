@@ -105,7 +105,7 @@ export default function Content() {
         >
           <AccordionInput title="subtitle" />
           <AccordionInput title="fit" />
-          <AccordionInput title="sizing" />
+          <AccordionInput title="sizing" content="men sizing" />
         </Box>
       </Paper>
     </>
