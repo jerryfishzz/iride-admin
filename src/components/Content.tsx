@@ -23,7 +23,7 @@ export default function Content() {
   const handleChangeContent = (e: React.MouseEvent) => {
     // e.preventDefault()
     const newContent = `New Content ${Math.random()}`
-    setContent(newContent)
+    // setContent(newContent)
   }
 
   const generateJSON = (e: React.FormEvent) => {
