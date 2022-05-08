@@ -13,13 +13,25 @@ import RefreshIcon from '@mui/icons-material/Refresh'
 import { Box } from '@mui/material'
 import AccordionInput from './AccordionInput'
 
+interface FormElements extends HTMLFormControlsCollection {
+  sizingTextField: HTMLInputElement
+}
+
 export default function Content() {
   const [content, setContent] = React.useState<string>('men sizing')
 
-  const handleChangeContent = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
+  const handleChangeContent = (e: React.MouseEvent) => {
+    // e.preventDefault()
     const newContent = `New Content ${Math.random()}`
     setContent(newContent)
+  }
+
+  const generateJSON = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('submit')
+
+    const elements = (e.target as HTMLFormElement).elements as FormElements
+    console.log(elements.sizingTextField.value)
   }
 
   return (
@@ -110,12 +122,15 @@ export default function Content() {
           }}
           noValidate
           autoComplete="off"
+          onSubmit={generateJSON}
         >
           <AccordionInput title="subtitle" />
           <AccordionInput title="fit" />
           <AccordionInput title="sizing" content={content} />
 
-          <Button onClick={handleChangeContent}>Change the content</Button>
+          <Button type="submit" onClick={handleChangeContent}>
+            Change the content
+          </Button>
         </Box>
       </Paper>
     </>

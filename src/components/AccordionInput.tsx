@@ -31,13 +31,13 @@ export default function AccordionInput({
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="subtitle-content"
-        id={`${lowecaseTitle}-header`}
+        id={`${lowecaseTitle}Header`}
       >
         <Typography variant="button">{lowecaseTitle}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <TextField
-          id={`${lowecaseTitle}-text-field`}
+          id={`${lowecaseTitle}TextField`}
           label={capitalizedTitle}
           variant="standard"
           fullWidth
