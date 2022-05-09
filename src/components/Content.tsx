@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { Box } from '@mui/material'
 import AccordionInput from './AccordionInput'
+import GridImages from './GridImages'
 
 interface FormElements extends HTMLFormControlsCollection {
   sizingTextField: HTMLInputElement
@@ -127,6 +128,22 @@ export default function Content() {
           <AccordionInput title="subtitle" />
           <AccordionInput title="fit" />
           <AccordionInput title="sizing" content={content} />
+
+
+          {/* <AccordionInput title="Grid">
+            <InputUnit repeat={1}>
+              <UnitTitle>Grid 1</UnitTitle>
+              <UnitInput>
+                <InputTitle>Description</InputTitle>
+                <VideoSwitch />
+              </UnitInput>
+              <UnitInput>
+                <InputTitle>Folename</InputTitle>
+              </UnitInput>
+            </InputUnit>
+          </AccordionInput> */}
+
+          <GridImages />
 
           <Button type="submit" onClick={handleChangeContent}>
             Change the content
