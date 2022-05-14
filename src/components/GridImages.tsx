@@ -29,6 +29,12 @@ export default function GridImages() {
           <UnitTextInput id="grid2Description" label="Description" />
           <UnitSwitch />
         </InputUnit>
+        <InputUnit>
+          <UnitTitle>Grid 3</UnitTitle>
+          <UnitTextInput id="grid3Filename" label="Filename" />
+          <UnitTextInput id="grid3Description" label="Description" />
+          <UnitSwitch />
+        </InputUnit>
       </AccordionDetails>
     </Accordion>
   )

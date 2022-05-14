@@ -51,7 +51,15 @@ function UnitTextInput({ id, label }: UnitTextInputProps) {
 function UnitSwitch() {
   useInputUnit()
 
-  return <FormControlLabel control={<Switch />} label="Video" />
+  return (
+    <Box
+      sx={{
+        my: 1,
+      }}
+    >
+      <FormControlLabel control={<Switch />} label="Video" />
+    </Box>
+  )
 }
 
 export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch }
