@@ -21,18 +21,15 @@ export default function GridImages() {
         <InputUnit>
           <UnitTitle>Grid 1</UnitTitle>
           <UnitTextInput id="grid1Filename" label="Filename" />
-          <UnitTextInput id="grid1Description" label="Description" />
         </InputUnit>
         <InputUnit>
           <UnitTitle>Grid 2</UnitTitle>
           <UnitTextInput id="grid2Filename" label="Filename" />
-          <UnitTextInput id="grid2Description" label="Description" />
           <UnitSwitch />
         </InputUnit>
         <InputUnit>
           <UnitTitle>Grid 3</UnitTitle>
           <UnitTextInput id="grid3Filename" label="Filename" />
-          <UnitTextInput id="grid3Description" label="Description" />
           <UnitSwitch />
         </InputUnit>
       </AccordionDetails>
