@@ -1,4 +1,10 @@
-import { Box, TextField, Typography } from '@mui/material'
+import {
+  Box,
+  FormControlLabel,
+  Switch,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { createContext, useContext } from 'react'
 
 const InputUnitContext = createContext<unknown>(undefined)
@@ -42,4 +48,10 @@ function UnitTextInput({ id, label }: UnitTextInputProps) {
   return <TextField id={id} label={label} variant="standard" fullWidth />
 }
 
-export { InputUnit, UnitTitle, UnitTextInput }
+function UnitSwitch() {
+  useInputUnit()
+
+  return <FormControlLabel control={<Switch />} label="Video" />
+}
+
+export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch }

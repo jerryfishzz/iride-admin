@@ -5,7 +5,7 @@ import {
   AccordionSummary,
   Typography,
 } from '@mui/material'
-import { InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
+import { InputUnit, UnitSwitch, UnitTextInput, UnitTitle } from './InputUnit'
 
 export default function GridImages() {
   return (
@@ -27,6 +27,7 @@ export default function GridImages() {
           <UnitTitle>Grid 2</UnitTitle>
           <UnitTextInput id="grid2Filename" label="Filename" />
           <UnitTextInput id="grid2Description" label="Description" />
+          <UnitSwitch />
         </InputUnit>
       </AccordionDetails>
     </Accordion>
