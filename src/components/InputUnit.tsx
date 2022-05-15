@@ -8,14 +8,11 @@ import {
 import {
   InputUnitContext,
   modifyInput,
+  toggleVideo,
   unitReducer,
   useInputUnit,
 } from 'context/input-unit'
-import {
-  ChangeEvent,
-  ReactNode,
-  useReducer,
-} from 'react'
+import { ChangeEvent, ReactNode, useReducer } from 'react'
 
 interface UnitTextInputProps {
   id: string
@@ -68,7 +65,10 @@ function UnitTextInput({ id, label }: UnitTextInputProps) {
 }
 
 function UnitSwitch() {
-  useInputUnit()
+  const [{ isVideo }, dispatch] = useInputUnit()
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    toggleVideo(dispatch, e.target.checked)
+  }
 
   return (
     <Box
@@ -76,7 +76,16 @@ function UnitSwitch() {
         my: 1,
       }}
     >
-      <FormControlLabel control={<Switch />} label="Video" />
+      <FormControlLabel
+        control={
+          <Switch
+            checked={isVideo}
+            onChange={handleChange}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+        }
+        label="Video"
+      />
     </Box>
   )
 }

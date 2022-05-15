@@ -11,7 +11,7 @@ enum ACTION_TYPE {
 }
 
 type Action =
-  | { type: ACTION_TYPE.TOGGLE_VIDEO }
+  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
   | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
 
 const initialState = {
@@ -28,7 +28,7 @@ const unitReducer = (state: typeof initialState, action: Action) => {
     case ACTION_TYPE.TOGGLE_VIDEO:
       return {
         ...state,
-        isVideo: !state.isVideo,
+        isVideo: action.isVideo,
       }
     case ACTION_TYPE.MODIFY_INPUT:
       return {
@@ -52,8 +52,8 @@ const modifyInput = (dispatch: Dispatch<Action>, input: string) => {
   dispatch({ type: ACTION_TYPE.MODIFY_INPUT, input })
 }
 
-const toggleVideo = (dispatch: Dispatch<Action>) => {
-  dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO })
+const toggleVideo = (dispatch: Dispatch<Action>, isVideo: boolean) => {
+  dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO, isVideo })
 }
 
 export { InputUnitContext, unitReducer, useInputUnit, modifyInput, toggleVideo }
