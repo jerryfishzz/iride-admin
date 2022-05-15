@@ -1,8 +1,14 @@
 import { createContext, Dispatch, useContext } from 'react'
 
+enum Label {
+  filename = 'Filename',
+  url = 'URL',
+}
+
 interface InitialState {
   input: string
   isVideo: boolean
+  label: Label.filename | Label.url
 }
 
 enum ACTION_TYPE {
@@ -14,21 +20,17 @@ type Action =
   | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
   | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
 
-const initialState = {
-  input: '',
-  isVideo: false,
-}
-
 const InputUnitContext = createContext<
   [InitialState, Dispatch<Action>] | undefined
 >(undefined)
 
-const unitReducer = (state: typeof initialState, action: Action) => {
+const unitReducer = (state: InitialState, action: Action) => {
   switch (action.type) {
     case ACTION_TYPE.TOGGLE_VIDEO:
       return {
         ...state,
         isVideo: action.isVideo,
+        label: action.isVideo ? Label.url : Label.filename,
       }
     case ACTION_TYPE.MODIFY_INPUT:
       return {
@@ -56,4 +58,11 @@ const toggleVideo = (dispatch: Dispatch<Action>, isVideo: boolean) => {
   dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO, isVideo })
 }
 
-export { InputUnitContext, unitReducer, useInputUnit, modifyInput, toggleVideo }
+export {
+  InputUnitContext,
+  unitReducer,
+  useInputUnit,
+  modifyInput,
+  toggleVideo,
+  Label,
+}

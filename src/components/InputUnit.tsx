@@ -7,6 +7,7 @@ import {
 } from '@mui/material'
 import {
   InputUnitContext,
+  Label,
   modifyInput,
   toggleVideo,
   unitReducer,
@@ -14,14 +15,10 @@ import {
 } from 'context/input-unit'
 import { ChangeEvent, ReactNode, useReducer } from 'react'
 
-interface UnitTextInputProps {
-  id: string
-  label: string
-}
-
 const initialState = {
   input: '',
   isVideo: false,
+  label: Label.filename,
 }
 
 function InputUnit({ children }: { children: ReactNode }) {
@@ -45,8 +42,8 @@ function UnitTitle({ children }: { children: React.ReactNode }) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id, label }: UnitTextInputProps) {
-  const [{ input }, dispatch] = useInputUnit()
+function UnitTextInput({ id }: { id: string }) {
+  const [{ input, label }, dispatch] = useInputUnit()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     modifyInput(dispatch, e.target.value)
