@@ -129,20 +129,6 @@ export default function Content() {
           <AccordionInput title="fit" />
           <AccordionInput title="sizing" content={content} />
 
-
-          {/* <AccordionInput title="Grid">
-            <InputUnit repeat={1}>
-              <UnitTitle>Grid 1</UnitTitle>
-              <UnitInput>
-                <InputTitle>Description</InputTitle>
-                <VideoSwitch />
-              </UnitInput>
-              <UnitInput>
-                <InputTitle>Folename</InputTitle>
-              </UnitInput>
-            </InputUnit>
-          </AccordionInput> */}
-
           <GridImages />
 
           <Button type="submit" onClick={handleChangeContent}>
