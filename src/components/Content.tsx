@@ -11,20 +11,19 @@ import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { Box } from '@mui/material'
-import AccordionInput from './AccordionInput'
 import GridImages from './GridImages'
+import LoneInput from './LoneInput'
 
 interface FormElements extends HTMLFormControlsCollection {
   sizingTextField: HTMLInputElement
 }
 
 export default function Content() {
-  const [content, setContent] = React.useState<string>('men sizing')
-
   const handleChangeContent = (e: React.MouseEvent) => {
     // e.preventDefault()
-    const newContent = `New Content ${Math.random()}`
+    // const newContent = `New Content ${Math.random()}`
     // setContent(newContent)
+    console.log('Clicked submit button')
   }
 
   const generateJSON = (e: React.FormEvent) => {
@@ -125,14 +124,13 @@ export default function Content() {
           autoComplete="off"
           onSubmit={generateJSON}
         >
-          <AccordionInput title="subtitle" />
-          <AccordionInput title="fit" />
-          <AccordionInput title="sizing" content={content} />
-
+          <LoneInput title="subtitle" />
           <GridImages />
+          <LoneInput title="fit" />
+          <LoneInput title="sizing" />
 
           <Button type="submit" onClick={handleChangeContent}>
-            Change the content
+            Submit
           </Button>
         </Box>
       </Paper>
