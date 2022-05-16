@@ -13,6 +13,7 @@ import RefreshIcon from '@mui/icons-material/Refresh'
 import { Box } from '@mui/material'
 import GridImages from './GridImages'
 import LoneInput from './LoneInput'
+import Features from './Features'
 
 interface FormElements extends HTMLFormControlsCollection {
   sizingTextField: HTMLInputElement
@@ -126,6 +127,7 @@ export default function Content() {
         >
           <LoneInput title="Subtitle" />
           <GridImages />
+          <Features />
           <LoneInput title="Fit" />
           <LoneInput title="Sizing" />
 

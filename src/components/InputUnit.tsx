@@ -15,6 +15,11 @@ import {
 } from 'context/input-unit'
 import { ChangeEvent, ReactNode, useReducer } from 'react'
 
+interface UnitTextInputProps {
+  id: string
+  label?: string
+}
+
 const initialState = {
   input: '',
   isVideo: false,
@@ -42,8 +47,8 @@ function UnitTitle({ children }: { children: React.ReactNode }) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id }: { id: string }) {
-  const [{ input, label }, dispatch] = useInputUnit()
+function UnitTextInput({ id, label }: UnitTextInputProps) {
+  const [{ input, label: stateLabel }, dispatch] = useInputUnit()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     modifyInput(dispatch, e.target.value)
@@ -52,7 +57,7 @@ function UnitTextInput({ id }: { id: string }) {
   return (
     <TextField
       id={id}
-      label={label}
+      label={label ? label : stateLabel}
       variant="standard"
       fullWidth
       value={input}
