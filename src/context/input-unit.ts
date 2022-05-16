@@ -1,3 +1,4 @@
+import { Action, ACTION_TYPE } from 'components/InputUnit'
 import { createContext, Dispatch, useContext } from 'react'
 
 enum Label {
@@ -10,15 +11,6 @@ interface InitialState {
   isVideo: boolean
   label: Label.filename | Label.url
 }
-
-enum ACTION_TYPE {
-  TOGGLE_VIDEO = 'TOGGLE_VIDEO',
-  MODIFY_INPUT = 'MODIFY_INPUT',
-}
-
-type Action =
-  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
-  | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
 
 const InputUnitContext = createContext<
   [InitialState, Dispatch<Action>] | undefined

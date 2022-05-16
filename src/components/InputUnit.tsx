@@ -8,16 +8,25 @@ import {
 import {
   InputUnitContext,
   Label,
-  modifyInput,
   toggleVideo,
   unitReducer,
   useInputUnit,
 } from 'context/input-unit'
-import { ChangeEvent, ReactNode, useReducer } from 'react'
+import { ChangeEvent, Dispatch, ReactNode, useReducer } from 'react'
+
+enum ACTION_TYPE {
+  TOGGLE_VIDEO = 'TOGGLE_VIDEO',
+  MODIFY_INPUT = 'MODIFY_INPUT',
+}
+
+type Action =
+  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
+  | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
 
 interface UnitTextInputProps {
   id: string
   label?: string
+  modifyInput: (dispatch: Dispatch<Action>, input: string) => void
 }
 
 const initialState = {
@@ -42,12 +51,12 @@ function InputUnit({ children }: { children: ReactNode }) {
   )
 }
 
-function UnitTitle({ children }: { children: React.ReactNode }) {
+function UnitTitle({ children }: { children: ReactNode }) {
   useInputUnit()
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id, label }: UnitTextInputProps) {
+function UnitTextInput({ id, label, modifyInput }: UnitTextInputProps) {
   const [{ input, label: stateLabel }, dispatch] = useInputUnit()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -92,4 +101,5 @@ function UnitSwitch() {
   )
 }
 
-export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch }
+export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, ACTION_TYPE }
+export type { Action }
