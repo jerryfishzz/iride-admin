@@ -5,16 +5,16 @@ export default function GridDetails() {
     <>
       <InputUnit>
         <UnitTitle>Grid 1</UnitTitle>
-        <UnitTextInput id="grid1Filename" />
+        <UnitTextInput id="grid-1-filename" />
       </InputUnit>
       <InputUnit>
         <UnitTitle>Grid 2</UnitTitle>
-        <UnitTextInput id="grid2Filename" />
+        <UnitTextInput id="grid-2-filename" />
         <UnitSwitch />
       </InputUnit>
       <InputUnit>
         <UnitTitle>Grid 3</UnitTitle>
-        <UnitTextInput id="grid3Filename" />
+        <UnitTextInput id="grid-3-filename" />
         <UnitSwitch />
       </InputUnit>
     </>
