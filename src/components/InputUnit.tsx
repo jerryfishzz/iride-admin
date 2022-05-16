@@ -5,13 +5,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import {
-  InputUnitContext,
-  Label,
-  unitReducer,
-  useInputUnit,
-} from 'context/input-unit'
-import { ChangeEvent, Dispatch, ReactNode, useReducer } from 'react'
+import { InputUnitContext, unitReducer, useInputUnit } from 'context/input-unit'
+import { ChangeEvent, Context, Dispatch, ReactNode, useReducer } from 'react'
 
 enum ACTION_TYPE {
   TOGGLE_VIDEO = 'TOGGLE_VIDEO',
@@ -22,27 +17,46 @@ type Action =
   | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
   | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
 
+enum Label {
+  filename = 'Filename',
+  url = 'URL',
+}
+
+type InitialState = {
+  input?: string
+  isVideo?: boolean
+  label?: Label.filename | Label.url
+}
+
+interface InputUnitProps {
+  UnitContext: Context<[InitialState, Dispatch<Action>] | undefined>
+  reducer: (state: InitialState, action: Action) => InitialState
+  initialState: InitialState
+  children: ReactNode
+}
+
 interface UnitTextInputProps {
   id: string
   label?: string
   modifyInput: (dispatch: Dispatch<Action>, input: string) => void
+  useUnit: () => [InitialState, Dispatch<Action>]
 }
 
 interface UnitSwitchProps {
   toggleVideo: (dispatch: Dispatch<Action>, isVideo: boolean) => void
+  useUnit: () => [InitialState, Dispatch<Action>]
 }
 
-const initialState = {
-  input: '',
-  isVideo: false,
-  label: Label.filename,
-}
-
-function InputUnit({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(unitReducer, initialState)
+function InputUnit({
+  UnitContext,
+  reducer,
+  initialState,
+  children,
+}: InputUnitProps) {
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
-    <InputUnitContext.Provider value={[state, dispatch]}>
+    <UnitContext.Provider value={[state, dispatch]}>
       <Box
         sx={{
           my: 2,
@@ -50,7 +64,7 @@ function InputUnit({ children }: { children: ReactNode }) {
       >
         {children}
       </Box>
-    </InputUnitContext.Provider>
+    </UnitContext.Provider>
   )
 }
 
@@ -59,8 +73,13 @@ function UnitTitle({ children }: { children: ReactNode }) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id, label, modifyInput }: UnitTextInputProps) {
-  const [{ input, label: stateLabel }, dispatch] = useInputUnit()
+function UnitTextInput({
+  id,
+  label,
+  modifyInput,
+  useUnit,
+}: UnitTextInputProps) {
+  const [{ input, label: stateLabel }, dispatch] = useUnit()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     modifyInput(dispatch, e.target.value)
@@ -78,8 +97,9 @@ function UnitTextInput({ id, label, modifyInput }: UnitTextInputProps) {
   )
 }
 
-function UnitSwitch({ toggleVideo }: UnitSwitchProps) {
-  const [{ isVideo }, dispatch] = useInputUnit()
+function UnitSwitch({ toggleVideo, useUnit }: UnitSwitchProps) {
+  const [{ isVideo }, dispatch] = useUnit()
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     toggleVideo(dispatch, e.target.checked)
   }
@@ -104,5 +124,5 @@ function UnitSwitch({ toggleVideo }: UnitSwitchProps) {
   )
 }
 
-export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, ACTION_TYPE }
-export type { Action }
+export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, ACTION_TYPE, Label }
+export type { Action, InitialState }

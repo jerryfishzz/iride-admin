@@ -1,22 +1,53 @@
-import { modifyInput, toggleVideo } from 'context/input-unit'
+import {
+  initialState,
+  InputUnitContext,
+  modifyInput,
+  toggleVideo,
+  unitReducer,
+  useInputUnit,
+} from 'context/input-unit'
 import { InputUnit, UnitSwitch, UnitTextInput, UnitTitle } from './InputUnit'
 
 export default function GridDetails() {
   return (
     <>
-      <InputUnit>
+      <InputUnit
+        UnitContext={InputUnitContext}
+        reducer={unitReducer}
+        initialState={initialState}
+      >
         <UnitTitle>Grid 1</UnitTitle>
-        <UnitTextInput id="grid-1-filename" modifyInput={modifyInput} />
+        <UnitTextInput
+          id="grid-1-filename"
+          modifyInput={modifyInput}
+          useUnit={useInputUnit}
+        />
       </InputUnit>
-      <InputUnit>
+      <InputUnit
+        UnitContext={InputUnitContext}
+        reducer={unitReducer}
+        initialState={initialState}
+      >
         <UnitTitle>Grid 2</UnitTitle>
-        <UnitTextInput id="grid-2-filename" modifyInput={modifyInput} />
-        <UnitSwitch toggleVideo={toggleVideo} />
+        <UnitTextInput
+          id="grid-2-filename"
+          modifyInput={modifyInput}
+          useUnit={useInputUnit}
+        />
+        <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />
       </InputUnit>
-      <InputUnit>
+      <InputUnit
+        UnitContext={InputUnitContext}
+        reducer={unitReducer}
+        initialState={initialState}
+      >
         <UnitTitle>Grid 3</UnitTitle>
-        <UnitTextInput id="grid-3-filename" modifyInput={modifyInput} />
-        <UnitSwitch toggleVideo={toggleVideo} />
+        <UnitTextInput
+          id="grid-3-filename"
+          modifyInput={modifyInput}
+          useUnit={useInputUnit}
+        />
+        <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />
       </InputUnit>
     </>
   )

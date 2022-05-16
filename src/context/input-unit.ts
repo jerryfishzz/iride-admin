@@ -1,15 +1,10 @@
-import { Action, ACTION_TYPE } from 'components/InputUnit'
+import { Action, ACTION_TYPE, InitialState, Label } from 'components/InputUnit'
 import { createContext, Dispatch, useContext } from 'react'
 
-enum Label {
-  filename = 'Filename',
-  url = 'URL',
-}
-
-interface InitialState {
-  input: string
-  isVideo: boolean
-  label: Label.filename | Label.url
+const initialState = {
+  input: '',
+  isVideo: false,
+  label: Label.filename,
 }
 
 const InputUnitContext = createContext<
@@ -57,4 +52,5 @@ export {
   modifyInput,
   toggleVideo,
   Label,
+  initialState,
 }
