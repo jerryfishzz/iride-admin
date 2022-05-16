@@ -1,38 +1,6 @@
-import ExpandMore from '@mui/icons-material/ExpandMore'
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from '@mui/material'
-import { InputUnit, UnitSwitch, UnitTextInput, UnitTitle } from './InputUnit'
+import AccordionInput from './AccordionInput'
+import GridDetails from './GridDetails'
 
 export default function GridImages() {
-  return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMore />}
-        aria-controls="grid-content"
-        id="grid-header"
-      >
-        <Typography variant="button">Grid</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <InputUnit>
-          <UnitTitle>Grid 1</UnitTitle>
-          <UnitTextInput id="grid1Filename" />
-        </InputUnit>
-        <InputUnit>
-          <UnitTitle>Grid 2</UnitTitle>
-          <UnitTextInput id="grid2Filename" />
-          <UnitSwitch />
-        </InputUnit>
-        <InputUnit>
-          <UnitTitle>Grid 3</UnitTitle>
-          <UnitTextInput id="grid3Filename" />
-          <UnitSwitch />
-        </InputUnit>
-      </AccordionDetails>
-    </Accordion>
-  )
+  return <AccordionInput details={<GridDetails />} />
 }
