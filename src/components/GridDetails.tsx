@@ -1,4 +1,4 @@
-import { modifyInput } from 'context/input-unit'
+import { modifyInput, toggleVideo } from 'context/input-unit'
 import { InputUnit, UnitSwitch, UnitTextInput, UnitTitle } from './InputUnit'
 
 export default function GridDetails() {
@@ -11,12 +11,12 @@ export default function GridDetails() {
       <InputUnit>
         <UnitTitle>Grid 2</UnitTitle>
         <UnitTextInput id="grid-2-filename" modifyInput={modifyInput} />
-        <UnitSwitch />
+        <UnitSwitch toggleVideo={toggleVideo} />
       </InputUnit>
       <InputUnit>
         <UnitTitle>Grid 3</UnitTitle>
         <UnitTextInput id="grid-3-filename" modifyInput={modifyInput} />
-        <UnitSwitch />
+        <UnitSwitch toggleVideo={toggleVideo} />
       </InputUnit>
     </>
   )

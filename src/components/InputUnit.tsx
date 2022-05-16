@@ -8,7 +8,6 @@ import {
 import {
   InputUnitContext,
   Label,
-  toggleVideo,
   unitReducer,
   useInputUnit,
 } from 'context/input-unit'
@@ -27,6 +26,10 @@ interface UnitTextInputProps {
   id: string
   label?: string
   modifyInput: (dispatch: Dispatch<Action>, input: string) => void
+}
+
+interface UnitSwitchProps {
+  toggleVideo: (dispatch: Dispatch<Action>, isVideo: boolean) => void
 }
 
 const initialState = {
@@ -75,7 +78,7 @@ function UnitTextInput({ id, label, modifyInput }: UnitTextInputProps) {
   )
 }
 
-function UnitSwitch() {
+function UnitSwitch({ toggleVideo }: UnitSwitchProps) {
   const [{ isVideo }, dispatch] = useInputUnit()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     toggleVideo(dispatch, e.target.checked)
