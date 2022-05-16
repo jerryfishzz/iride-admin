@@ -7,15 +7,25 @@ import {
 } from '@mui/material'
 import { ReactNode } from 'react'
 
-export default function AccordionInput({ details }: { details: ReactNode }) {
+interface AccordionInputProps {
+  title: string
+  details: ReactNode
+}
+
+export default function AccordionInput({
+  title,
+  details,
+}: AccordionInputProps) {
+  const kebabCaseTitle = title.toLowerCase().replace(' ', '-')
+
   return (
     <Accordion>
       <AccordionSummary
         expandIcon={<ExpandMore />}
-        aria-controls="grid-content"
-        id="grid-header"
+        aria-controls={`${kebabCaseTitle}-content`}
+        id={`${kebabCaseTitle}-header`}
       >
-        <Typography variant="button">Grid</Typography>
+        <Typography variant="button">{title}</Typography>
       </AccordionSummary>
       <AccordionDetails>{details}</AccordionDetails>
     </Accordion>
