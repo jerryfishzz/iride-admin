@@ -124,10 +124,10 @@ export default function Content() {
           autoComplete="off"
           onSubmit={generateJSON}
         >
-          <LoneInput title="subtitle" />
+          <LoneInput title="Subtitle" />
           <GridImages />
-          <LoneInput title="fit" />
-          <LoneInput title="sizing" />
+          <LoneInput title="Fit" />
+          <LoneInput title="Sizing" />
 
           <Button type="submit" onClick={handleChangeContent}>
             Submit

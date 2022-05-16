@@ -19,4 +19,8 @@ function createCtx<A extends {} | null>(
   return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
 }
 
-export { createCtx }
+function getKebabCase(str: string): string {
+  return str.toLowerCase().replace(' ', '-')
+}
+
+export { createCtx, getKebabCase }

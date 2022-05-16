@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@mui/material'
 import { ReactNode } from 'react'
+import { getKebabCase } from 'utils/helper'
 
 interface AccordionInputProps {
   title: string
@@ -16,7 +17,7 @@ export default function AccordionInput({
   title,
   details,
 }: AccordionInputProps) {
-  const kebabCaseTitle = title.toLowerCase().replace(' ', '-')
+  const kebabCaseTitle = getKebabCase(title)
 
   return (
     <Accordion>
