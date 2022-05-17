@@ -2,7 +2,7 @@
 
 ## Dynamic Form Elements Type
 
-I know how to type a known input in the `elements` property of a submission form object, such as an input with id `username` will look like:
+I know how to define the type of a known input in the `elements` property of a submission form object, such as an input with id `username` will look like:
 
 ```javascript
 interface FormElements extends HTMLFormControlsCollection {
