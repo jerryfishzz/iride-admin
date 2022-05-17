@@ -8,6 +8,10 @@ import {
 } from 'context/input-unit'
 import { InputUnit, UnitSwitch, UnitTextInput, UnitTitle } from './InputUnit'
 
+const hasSwitch1 = false
+const hasSwitch2 = true
+const hasSwitch3 = true
+
 export default function GridDetails() {
   return (
     <>
@@ -22,6 +26,7 @@ export default function GridDetails() {
           modifyInput={modifyInput}
           useUnit={useInputUnit}
         />
+        {hasSwitch1 && <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />}
       </InputUnit>
       <InputUnit
         UnitContext={InputUnitContext}
@@ -34,7 +39,7 @@ export default function GridDetails() {
           modifyInput={modifyInput}
           useUnit={useInputUnit}
         />
-        <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />
+        {hasSwitch2 && <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />}
       </InputUnit>
       <InputUnit
         UnitContext={InputUnitContext}
@@ -47,7 +52,7 @@ export default function GridDetails() {
           modifyInput={modifyInput}
           useUnit={useInputUnit}
         />
-        <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />
+        {hasSwitch3 && <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />}
       </InputUnit>
     </>
   )
