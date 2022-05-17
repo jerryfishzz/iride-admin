@@ -1,12 +1,6 @@
 import { Action, ACTION_TYPE, InitialState, Label } from 'components/InputUnit'
 import { createContext, Dispatch, useContext } from 'react'
 
-const initialState = {
-  input: '',
-  isVideo: false,
-  label: Label.filename,
-}
-
 const InputUnitContext = createContext<
   [InitialState, Dispatch<Action>] | undefined
 >(undefined)
@@ -52,5 +46,4 @@ export {
   modifyInput,
   toggleVideo,
   Label,
-  initialState,
 }

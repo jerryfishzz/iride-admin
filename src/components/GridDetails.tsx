@@ -1,59 +1,38 @@
 import {
-  initialState,
   InputUnitContext,
   modifyInput,
   toggleVideo,
   unitReducer,
   useInputUnit,
 } from 'context/input-unit'
+import { GridImagesProps } from './GridImages'
 import { InputUnit, UnitSwitch, UnitTextInput, UnitTitle } from './InputUnit'
 
-const hasSwitch1 = false
-const hasSwitch2 = true
-const hasSwitch3 = true
-
-export default function GridDetails() {
+export default function GridDetails({ gridImages }: GridImagesProps) {
   return (
     <>
-      <InputUnit
-        UnitContext={InputUnitContext}
-        reducer={unitReducer}
-        initialState={initialState}
-      >
-        <UnitTitle useUnit={useInputUnit}>Grid 1</UnitTitle>
-        <UnitTextInput
-          id="grid-1-filename"
-          modifyInput={modifyInput}
-          useUnit={useInputUnit}
-        />
-        {hasSwitch1 && <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />}
-      </InputUnit>
-      <InputUnit
-        UnitContext={InputUnitContext}
-        reducer={unitReducer}
-        initialState={initialState}
-      >
-        <UnitTitle useUnit={useInputUnit}>Grid 2</UnitTitle>
-        <UnitTextInput
-          id="grid-2-filename"
-          modifyInput={modifyInput}
-          useUnit={useInputUnit}
-        />
-        {hasSwitch2 && <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />}
-      </InputUnit>
-      <InputUnit
-        UnitContext={InputUnitContext}
-        reducer={unitReducer}
-        initialState={initialState}
-      >
-        <UnitTitle useUnit={useInputUnit}>Grid 3</UnitTitle>
-        <UnitTextInput
-          id="grid-3-filename"
-          modifyInput={modifyInput}
-          useUnit={useInputUnit}
-        />
-        {hasSwitch3 && <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />}
-      </InputUnit>
+      {gridImages.map((gridImage, index) => {
+        const { hasSwitch, initialState } = gridImage
+
+        return (
+          <InputUnit
+            key={index}
+            UnitContext={InputUnitContext}
+            reducer={unitReducer}
+            initialState={initialState}
+          >
+            <UnitTitle useUnit={useInputUnit}>{`Grid ${index + 1}`}</UnitTitle>
+            <UnitTextInput
+              id={`grid-${index + 1}-filename`}
+              modifyInput={modifyInput}
+              useUnit={useInputUnit}
+            />
+            {hasSwitch && (
+              <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />
+            )}
+          </InputUnit>
+        )
+      })}
     </>
   )
 }

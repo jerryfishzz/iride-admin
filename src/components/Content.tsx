@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { Box } from '@mui/material'
-import GridImages from './GridImages'
+import GridImages, { createInitialGridState, GridImage } from './GridImages'
 import LoneInput from './LoneInput'
 import Features from './Features'
 
@@ -20,6 +20,10 @@ interface FormElements extends HTMLFormControlsCollection {
 }
 
 export default function Content() {
+  const [gridImages, setGridImages] = React.useState<GridImage[]>(
+    createInitialGridState
+  )
+
   const handleChangeContent = (e: React.MouseEvent) => {
     // e.preventDefault()
     // const newContent = `New Content ${Math.random()}`
@@ -32,7 +36,7 @@ export default function Content() {
     console.log('submit')
 
     const elements = (e.target as HTMLFormElement).elements as FormElements
-    console.log(elements.sizingTextField.value)
+    // console.log(elements.sizingTextField.value)
   }
 
   return (
@@ -126,7 +130,7 @@ export default function Content() {
           onSubmit={generateJSON}
         >
           <LoneInput title="Subtitle" />
-          <GridImages />
+          <GridImages gridImages={gridImages} />
           <Features />
           <LoneInput title="Fit" />
           <LoneInput title="Sizing" />
