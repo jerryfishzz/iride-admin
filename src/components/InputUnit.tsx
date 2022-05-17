@@ -5,7 +5,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { useInputUnit } from 'context/input-unit'
 import { ChangeEvent, Context, Dispatch, ReactNode, useReducer } from 'react'
 
 enum ACTION_TYPE {
@@ -32,6 +31,11 @@ interface InputUnitProps {
   UnitContext: Context<[InitialState, Dispatch<Action>] | undefined>
   reducer: (state: InitialState, action: Action) => InitialState
   initialState: InitialState
+  children: ReactNode
+}
+
+interface UnitTitleProps {
+  useUnit: () => [InitialState, Dispatch<Action>]
   children: ReactNode
 }
 
@@ -68,8 +72,8 @@ function InputUnit({
   )
 }
 
-function UnitTitle({ children }: { children: ReactNode }) {
-  useInputUnit()
+function UnitTitle({ useUnit, children }: UnitTitleProps) {
+  useUnit()
   return <Typography variant="h6">{children}</Typography>
 }
 

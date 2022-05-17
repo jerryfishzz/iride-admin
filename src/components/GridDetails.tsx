@@ -16,7 +16,7 @@ export default function GridDetails() {
         reducer={unitReducer}
         initialState={initialState}
       >
-        <UnitTitle>Grid 1</UnitTitle>
+        <UnitTitle useUnit={useInputUnit}>Grid 1</UnitTitle>
         <UnitTextInput
           id="grid-1-filename"
           modifyInput={modifyInput}
@@ -28,7 +28,7 @@ export default function GridDetails() {
         reducer={unitReducer}
         initialState={initialState}
       >
-        <UnitTitle>Grid 2</UnitTitle>
+        <UnitTitle useUnit={useInputUnit}>Grid 2</UnitTitle>
         <UnitTextInput
           id="grid-2-filename"
           modifyInput={modifyInput}
@@ -41,7 +41,7 @@ export default function GridDetails() {
         reducer={unitReducer}
         initialState={initialState}
       >
-        <UnitTitle>Grid 3</UnitTitle>
+        <UnitTitle useUnit={useInputUnit}>Grid 3</UnitTitle>
         <UnitTextInput
           id="grid-3-filename"
           modifyInput={modifyInput}
