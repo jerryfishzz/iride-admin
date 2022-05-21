@@ -11,18 +11,22 @@ import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { Box } from '@mui/material'
-import GridImages, { createInitialGridState, GridImage } from './GridImages'
 import LoneInput from './LoneInput'
 import Features from './Features'
+import { InitialState } from './InputUnit'
+import GridImages from './GridImages'
 
 interface FormElements extends HTMLFormControlsCollection {
   sizingTextField: HTMLInputElement
 }
 
+interface GridImage {
+  hasSwitch: boolean
+  initialState: InitialState
+}
+
 export default function Content() {
-  const [gridImages, setGridImages] = React.useState<GridImage[]>(
-    createInitialGridState
-  )
+  const [gridImages, setGridImages] = React.useState<GridImage[] | null>(null)
 
   const handleChangeContent = (e: React.MouseEvent) => {
     // e.preventDefault()
@@ -130,7 +134,7 @@ export default function Content() {
           onSubmit={generateJSON}
         >
           <LoneInput title="Subtitle" />
-          <GridImages gridImages={gridImages} />
+          <GridImages />
           <Features />
           <LoneInput title="Fit" />
           <LoneInput title="Sizing" />

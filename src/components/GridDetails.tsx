@@ -5,14 +5,34 @@ import {
   unitReducer,
   useInputUnit,
 } from 'context/input-unit'
-import { GridImagesProps } from './GridImages'
-import { InputUnit, UnitSwitch, UnitTextInput, UnitTitle } from './InputUnit'
+import {
+  InputUnit,
+  Label,
+  UnitSwitch,
+  UnitTextInput,
+  UnitTitle,
+} from './InputUnit'
 
-export default function GridDetails({ gridImages }: GridImagesProps) {
+const gridModel = {
+  hasSwitch: true,
+  initialState: {
+    input: '',
+    isVideo: false,
+    label: Label.filename,
+  },
+}
+
+const initialGridImagesState = [
+  { ...gridModel, hasSwitch: false },
+  { ...gridModel },
+  { ...gridModel },
+]
+
+export default function GridDetails() {
   return (
     <>
-      {gridImages.map((gridImage, index) => {
-        const { hasSwitch, initialState } = gridImage
+      {initialGridImagesState.map((initialGridImageState, index) => {
+        const { hasSwitch, initialState } = initialGridImageState
 
         return (
           <InputUnit
