@@ -47,6 +47,7 @@ export default function GridDetails() {
               modifyInput={modifyInput}
               useUnit={useInputUnit}
               keyName={`grid${index + 1}`}
+              inputKey="input"
             />
             {hasSwitch && (
               <UnitSwitch

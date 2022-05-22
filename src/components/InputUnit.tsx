@@ -27,6 +27,7 @@ type InitialState = {
   input?: string
   isVideo?: boolean
   label?: Label.filename | Label.url
+  [key: string]: string | boolean | (Label.filename | Label.url) | undefined
 }
 
 interface InputUnitProps {
@@ -47,6 +48,7 @@ interface UnitTextInputProps {
   modifyInput: (dispatch: Dispatch<Action>, input: string) => void
   useUnit: () => [InitialState, Dispatch<Action>]
   keyName: string
+  inputKey: string
 }
 
 interface UnitSwitchProps {
@@ -87,8 +89,12 @@ function UnitTextInput({
   modifyInput,
   useUnit,
   keyName,
+  inputKey,
 }: UnitTextInputProps) {
-  const [{ input, label: stateLabel }, dispatch] = useUnit()
+  const [state, dispatch] = useUnit()
+  const input = state[inputKey] as string
+  const stateLabel = state.label
+
   const [, contentDispatch] = useContent()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -96,9 +102,7 @@ function UnitTextInput({
   }
 
   useEffect(() => {
-    if (input !== undefined) {
-      modifyGridInput(contentDispatch, keyName, input)
-    }
+    modifyGridInput(contentDispatch, keyName, input)
   }, [contentDispatch, keyName, id, input])
 
   return (
