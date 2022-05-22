@@ -39,6 +39,19 @@ const toggleVideo = (dispatch: Dispatch<Action>, isVideo: boolean) => {
   dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO, isVideo })
 }
 
+const getGridName = (id: string) => {
+  switch (id) {
+    case 'grid-1-filename':
+      return 'grid1'
+    case 'grid-2-filename':
+      return 'grid2'
+    case 'grid-3-filename':
+      return 'grid3'
+    default:
+      throw Error('This should not happen')
+  }
+}
+
 export {
   InputUnitContext,
   unitReducer,
@@ -46,4 +59,5 @@ export {
   modifyInput,
   toggleVideo,
   Label,
+  getGridName,
 }

@@ -5,7 +5,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { ChangeEvent, Context, Dispatch, ReactNode, useReducer } from 'react'
+import { modifyGridInput, useContent } from 'context/content';
+import { ChangeEvent, Context, Dispatch, ReactNode, useEffect, useReducer } from 'react'
 
 enum ACTION_TYPE {
   TOGGLE_VIDEO = 'TOGGLE_VIDEO',
@@ -44,6 +45,7 @@ interface UnitTextInputProps {
   label?: string
   modifyInput: (dispatch: Dispatch<Action>, input: string) => void
   useUnit: () => [InitialState, Dispatch<Action>]
+  getKey: (id: string) => string
 }
 
 interface UnitSwitchProps {
@@ -82,12 +84,22 @@ function UnitTextInput({
   label,
   modifyInput,
   useUnit,
+  getKey
 }: UnitTextInputProps) {
   const [{ input, label: stateLabel }, dispatch] = useUnit()
+  const [, contentDispatch] = useContent()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     modifyInput(dispatch, e.target.value)
   }
+
+  useEffect(() => {
+    const gridName = getKey(id)
+
+    if (input) {
+      modifyGridInput(contentDispatch, gridName, input)
+    }
+  }, [contentDispatch, getKey, id, input])
 
   return (
     <TextField

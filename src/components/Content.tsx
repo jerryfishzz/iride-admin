@@ -13,20 +13,35 @@ import RefreshIcon from '@mui/icons-material/Refresh'
 import { Box } from '@mui/material'
 import LoneInput from './LoneInput'
 import Features from './Features'
-import { InitialState } from './InputUnit'
 import GridImages from './GridImages'
+import { ContentProvider, contentReducer } from 'context/content'
 
 interface FormElements extends HTMLFormControlsCollection {
   sizingTextField: HTMLInputElement
 }
 
-interface GridImage {
-  hasSwitch: boolean
-  initialState: InitialState
+const initialContent = {
+  grid: {
+    grid1: {
+      url: '',
+      isVideo: false,
+      filename: '',
+    },
+    grid2: {
+      url: '',
+      isVideo: false,
+      filename: '',
+    },
+    grid3: {
+      url: '',
+      isVideo: false,
+      filename: '',
+    }
+  }
 }
 
 export default function Content() {
-  const [gridImages, setGridImages] = React.useState<GridImage[] | null>(null)
+  const [content, contentDispatch] = React.useReducer(contentReducer, initialContent)
 
   const handleChangeContent = (e: React.MouseEvent) => {
     // e.preventDefault()
@@ -133,11 +148,14 @@ export default function Content() {
           autoComplete="off"
           onSubmit={generateJSON}
         >
-          <LoneInput title="Subtitle" />
-          <GridImages />
-          <Features />
-          <LoneInput title="Fit" />
-          <LoneInput title="Sizing" />
+          <ContentProvider value={[content, contentDispatch]}>
+            <LoneInput title="Subtitle" />
+            <GridImages />
+            <Features />
+            <LoneInput title="Fit" />
+            <LoneInput title="Sizing" />
+          </ContentProvider>
+          
 
           <Button type="submit" onClick={handleChangeContent}>
             Submit
