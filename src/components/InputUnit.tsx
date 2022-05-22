@@ -45,7 +45,7 @@ interface UnitTextInputProps {
   label?: string
   modifyInput: (dispatch: Dispatch<Action>, input: string) => void
   useUnit: () => [InitialState, Dispatch<Action>]
-  getKey: (id: string) => string
+  keyName: string
 }
 
 interface UnitSwitchProps {
@@ -84,7 +84,7 @@ function UnitTextInput({
   label,
   modifyInput,
   useUnit,
-  getKey
+  keyName
 }: UnitTextInputProps) {
   const [{ input, label: stateLabel }, dispatch] = useUnit()
   const [, contentDispatch] = useContent()
@@ -94,12 +94,10 @@ function UnitTextInput({
   }
 
   useEffect(() => {
-    const gridName = getKey(id)
-
     if (input) {
-      modifyGridInput(contentDispatch, gridName, input)
+      modifyGridInput(contentDispatch, keyName, input)
     }
-  }, [contentDispatch, getKey, id, input])
+  }, [contentDispatch, keyName, id, input])
 
   return (
     <TextField

@@ -1,5 +1,4 @@
 import {
-  getGridName,
   InputUnitContext,
   modifyInput,
   toggleVideo,
@@ -47,7 +46,7 @@ export default function GridDetails() {
               id={`grid-${index + 1}-filename`}
               modifyInput={modifyInput}
               useUnit={useInputUnit}
-              getKey={getGridName}
+              keyName={`grid${index + 1}`}
             />
             {hasSwitch && (
               <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />
