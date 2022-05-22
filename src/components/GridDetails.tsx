@@ -49,7 +49,11 @@ export default function GridDetails() {
               keyName={`grid${index + 1}`}
             />
             {hasSwitch && (
-              <UnitSwitch toggleVideo={toggleVideo} useUnit={useInputUnit} />
+              <UnitSwitch
+                toggleVideo={toggleVideo}
+                useUnit={useInputUnit}
+                keyName={`grid${index + 1}`}
+              />
             )}
           </InputUnit>
         )

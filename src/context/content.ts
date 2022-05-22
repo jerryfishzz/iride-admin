@@ -70,4 +70,12 @@ const modifyGridInput = (
   dispatch({ type: ACTION_TYPE.MODIFY_GRID_INPUT, gridName, input })
 }
 
-export { useContent, ContentProvider, contentReducer, modifyGridInput }
+const toggleGridVideo = (
+  dispatch: Dispatch<Action>,
+  gridName: string,
+  isVideo: boolean
+) => {
+  dispatch({ type: ACTION_TYPE.TOGGLE_GRID_VIDEO, gridName,isVideo })
+}
+
+export { useContent, ContentProvider, contentReducer, modifyGridInput, toggleGridVideo }

@@ -5,8 +5,15 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { modifyGridInput, useContent } from 'context/content';
-import { ChangeEvent, Context, Dispatch, ReactNode, useEffect, useReducer } from 'react'
+import { modifyGridInput, toggleGridVideo, useContent } from 'context/content'
+import {
+  ChangeEvent,
+  Context,
+  Dispatch,
+  ReactNode,
+  useEffect,
+  useReducer,
+} from 'react'
 
 enum ACTION_TYPE {
   TOGGLE_VIDEO = 'TOGGLE_VIDEO',
@@ -51,6 +58,7 @@ interface UnitTextInputProps {
 interface UnitSwitchProps {
   toggleVideo: (dispatch: Dispatch<Action>, isVideo: boolean) => void
   useUnit: () => [InitialState, Dispatch<Action>]
+  keyName: string
 }
 
 function InputUnit({
@@ -84,7 +92,7 @@ function UnitTextInput({
   label,
   modifyInput,
   useUnit,
-  keyName
+  keyName,
 }: UnitTextInputProps) {
   const [{ input, label: stateLabel }, dispatch] = useUnit()
   const [, contentDispatch] = useContent()
@@ -94,7 +102,7 @@ function UnitTextInput({
   }
 
   useEffect(() => {
-    if (input) {
+    if (input !== undefined) {
       modifyGridInput(contentDispatch, keyName, input)
     }
   }, [contentDispatch, keyName, id, input])
@@ -111,12 +119,20 @@ function UnitTextInput({
   )
 }
 
-function UnitSwitch({ toggleVideo, useUnit }: UnitSwitchProps) {
-  const [{ isVideo }, dispatch] = useUnit()
+function UnitSwitch({ toggleVideo, useUnit, keyName }: UnitSwitchProps) {
+  const [{ input, isVideo }, dispatch] = useUnit()
+  const [, contentDispatch] = useContent()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     toggleVideo(dispatch, e.target.checked)
   }
+
+  useEffect(() => {
+    if (isVideo !== undefined && input !== undefined) {
+      toggleGridVideo(contentDispatch, keyName, isVideo)
+      modifyGridInput(contentDispatch, keyName, input)
+    }
+  }, [contentDispatch, input, isVideo, keyName])
 
   return (
     <Box
