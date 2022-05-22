@@ -16,10 +16,6 @@ import Features from './Features'
 import GridImages from './GridImages'
 import { ContentProvider, contentReducer } from 'context/content'
 
-interface FormElements extends HTMLFormControlsCollection {
-  sizingTextField: HTMLInputElement
-}
-
 const initialContent = {
   grid: {
     grid1: {
@@ -57,7 +53,7 @@ export default function Content() {
     e.preventDefault()
     console.log('submit')
 
-    const elements = (e.target as HTMLFormElement).elements as FormElements
+    // const elements = (e.target as HTMLFormElement).elements as FormElements
     // console.log(elements.sizingTextField.value)
   }
 

@@ -1,10 +1,12 @@
+import { Button } from '@mui/material'
 import {
   FeatureContext,
   featureReducer,
   modifyInput,
   useFeature,
 } from 'context/features'
-import { InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
+import { useState } from 'react'
+import { InitialState, InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
 
 const featureModel = {
   filename: '',
@@ -12,9 +14,15 @@ const featureModel = {
   description: '',
 }
 
-const initialFeaturesState = [{ ...featureModel }]
-
 export default function FeatureDetails() {
+  const [initialFeaturesState, setInitialFeaturesState] = useState<
+    InitialState[]
+  >([{ ...featureModel }])
+
+  const handleAdd = () => {
+    setInitialFeaturesState(prev => [...prev, { ...featureModel }])
+  }
+
   return (
     <>
       {initialFeaturesState.map((initialFeatureState, index) => (
@@ -48,6 +56,9 @@ export default function FeatureDetails() {
           />
         </InputUnit>
       ))}
+      <Button variant="contained" onClick={handleAdd}>
+        Add
+      </Button>
     </>
   )
 }
