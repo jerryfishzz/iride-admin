@@ -4,7 +4,7 @@ import {
   toggleVideo,
   unitReducer,
   useInputUnit,
-} from 'context/input-unit'
+} from 'context/grid-images'
 import {
   InputUnit,
   Label,
