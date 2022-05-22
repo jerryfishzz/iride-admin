@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@mui/material'
 import { modifyGridInput, toggleGridVideo, useContent } from 'context/content'
+import { GridAction } from 'context/grid-images'
 import {
   ChangeEvent,
   Context,
@@ -15,14 +16,7 @@ import {
   useReducer,
 } from 'react'
 
-enum ACTION_TYPE {
-  TOGGLE_VIDEO = 'TOGGLE_VIDEO',
-  MODIFY_INPUT = 'MODIFY_INPUT',
-}
-
-type Action =
-  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
-  | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
+type Action = GridAction
 
 enum Label {
   filename = 'Filename',
@@ -154,5 +148,5 @@ function UnitSwitch({ toggleVideo, useUnit, keyName }: UnitSwitchProps) {
   )
 }
 
-export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, ACTION_TYPE, Label }
+export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, Label }
 export type { Action, InitialState }

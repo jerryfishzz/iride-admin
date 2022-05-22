@@ -1,11 +1,31 @@
-import { Action, ACTION_TYPE, InitialState, Label } from 'components/InputUnit'
+import { InitialState, Label } from 'components/InputUnit'
 import { createContext, Dispatch, useContext } from 'react'
 
+enum ACTION_TYPE {
+  TOGGLE_VIDEO = 'TOGGLE_VIDEO',
+  MODIFY_INPUT = 'MODIFY_INPUT',
+}
+
+type GridAction =
+  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
+  | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
+
+// enum Label {
+//   filename = 'Filename',
+//   url = 'URL',
+// }
+
+// type InitialState = {
+//   input?: string
+//   isVideo?: boolean
+//   label?: Label.filename | Label.url
+// }
+
 const InputUnitContext = createContext<
-  [InitialState, Dispatch<Action>] | undefined
+  [InitialState, Dispatch<GridAction>] | undefined
 >(undefined)
 
-const unitReducer = (state: InitialState, action: Action) => {
+const unitReducer = (state: InitialState, action: GridAction) => {
   switch (action.type) {
     case ACTION_TYPE.TOGGLE_VIDEO:
       return {
@@ -31,11 +51,11 @@ function useInputUnit() {
   return context
 }
 
-const modifyInput = (dispatch: Dispatch<Action>, input: string) => {
+const modifyInput = (dispatch: Dispatch<GridAction>, input: string) => {
   dispatch({ type: ACTION_TYPE.MODIFY_INPUT, input })
 }
 
-const toggleVideo = (dispatch: Dispatch<Action>, isVideo: boolean) => {
+const toggleVideo = (dispatch: Dispatch<GridAction>, isVideo: boolean) => {
   dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO, isVideo })
 }
 
@@ -47,3 +67,5 @@ export {
   toggleVideo,
   Label,
 }
+
+export type { GridAction }
