@@ -6,7 +6,6 @@ import {
   Typography,
 } from '@mui/material'
 import { modifyGridInput, toggleGridVideo, useContent } from 'context/content'
-import { GridAction } from 'context/grid-images'
 import {
   ChangeEvent,
   Context,
@@ -16,7 +15,14 @@ import {
   useReducer,
 } from 'react'
 
-type Action = GridAction
+enum ACTION_TYPE {
+  TOGGLE_VIDEO = 'TOGGLE_VIDEO',
+  MODIFY_INPUT = 'MODIFY_INPUT',
+}
+
+type Action =
+  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
+  | { type: ACTION_TYPE.MODIFY_INPUT; input: string; key: string }
 
 enum Label {
   filename = 'Filename',
@@ -45,9 +51,9 @@ interface UnitTitleProps {
 interface UnitTextInputProps {
   id: string
   label?: string
-  modifyInput: (dispatch: Dispatch<Action>, input: string) => void
+  modifyInput: (dispatch: Dispatch<Action>, input: string, key: string) => void
   useUnit: () => [InitialState, Dispatch<Action>]
-  keyName: string
+  keyName?: string
   inputKey: string
 }
 
@@ -98,11 +104,13 @@ function UnitTextInput({
   const [, contentDispatch] = useContent()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    modifyInput(dispatch, e.target.value)
+    modifyInput(dispatch, e.target.value, inputKey)
   }
 
   useEffect(() => {
-    modifyGridInput(contentDispatch, keyName, input)
+    if (keyName) {
+      modifyGridInput(contentDispatch, keyName, input)
+    }
   }, [contentDispatch, keyName, id, input])
 
   return (
@@ -152,5 +160,5 @@ function UnitSwitch({ toggleVideo, useUnit, keyName }: UnitSwitchProps) {
   )
 }
 
-export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, Label }
+export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, Label, ACTION_TYPE }
 export type { Action, InitialState }

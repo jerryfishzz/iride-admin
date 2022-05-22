@@ -1,20 +1,11 @@
-import { InitialState, Label } from 'components/InputUnit'
+import { Action, InitialState, Label, ACTION_TYPE } from 'components/InputUnit'
 import { createContext, Dispatch, useContext } from 'react'
 
-enum ACTION_TYPE {
-  TOGGLE_VIDEO = 'TOGGLE_VIDEO',
-  MODIFY_INPUT = 'MODIFY_INPUT',
-}
-
-type GridAction =
-  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
-  | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
-
 const InputUnitContext = createContext<
-  [InitialState, Dispatch<GridAction>] | undefined
+  [InitialState, Dispatch<Action>] | undefined
 >(undefined)
 
-const unitReducer = (state: InitialState, action: GridAction) => {
+const unitReducer = (state: InitialState, action: Action) => {
   switch (action.type) {
     case ACTION_TYPE.TOGGLE_VIDEO:
       return {
@@ -25,7 +16,7 @@ const unitReducer = (state: InitialState, action: GridAction) => {
     case ACTION_TYPE.MODIFY_INPUT:
       return {
         ...state,
-        input: action.input,
+        [action.key]: action.input,
       }
     default:
       throw new Error('Unhandled action type')
@@ -40,21 +31,16 @@ function useInputUnit() {
   return context
 }
 
-const modifyInput = (dispatch: Dispatch<GridAction>, input: string) => {
-  dispatch({ type: ACTION_TYPE.MODIFY_INPUT, input })
+const modifyInput = (
+  dispatch: Dispatch<Action>,
+  input: string,
+  key: string
+) => {
+  dispatch({ type: ACTION_TYPE.MODIFY_INPUT, input, key })
 }
 
-const toggleVideo = (dispatch: Dispatch<GridAction>, isVideo: boolean) => {
+const toggleVideo = (dispatch: Dispatch<Action>, isVideo: boolean) => {
   dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO, isVideo })
 }
 
-export {
-  InputUnitContext,
-  unitReducer,
-  useInputUnit,
-  modifyInput,
-  toggleVideo,
-  Label,
-}
-
-export type { GridAction }
+export { InputUnitContext, unitReducer, useInputUnit, modifyInput, toggleVideo }
