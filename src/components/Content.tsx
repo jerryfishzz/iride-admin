@@ -36,12 +36,15 @@ const initialContent = {
       url: '',
       isVideo: false,
       filename: '',
-    }
-  }
+    },
+  },
 }
 
 export default function Content() {
-  const [content, contentDispatch] = React.useReducer(contentReducer, initialContent)
+  const [content, contentDispatch] = React.useReducer(
+    contentReducer,
+    initialContent
+  )
 
   const handleChangeContent = (e: React.MouseEvent) => {
     // e.preventDefault()
@@ -155,7 +158,6 @@ export default function Content() {
             <LoneInput title="Fit" />
             <LoneInput title="Sizing" />
           </ContentProvider>
-          
 
           <Button type="submit" onClick={handleChangeContent}>
             Submit
