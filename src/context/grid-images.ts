@@ -10,17 +10,6 @@ type GridAction =
   | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
   | { type: ACTION_TYPE.MODIFY_INPUT; input: string }
 
-// enum Label {
-//   filename = 'Filename',
-//   url = 'URL',
-// }
-
-// type InitialState = {
-//   input?: string
-//   isVideo?: boolean
-//   label?: Label.filename | Label.url
-// }
-
 const InputUnitContext = createContext<
   [InitialState, Dispatch<GridAction>] | undefined
 >(undefined)
