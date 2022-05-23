@@ -35,6 +35,7 @@ export default function GridDetails() {
     <>
       {initialGridImagesState.map((initialGridImageState, index) => {
         const { hasSwitch, initialState } = initialGridImageState
+        const order = index + 1
 
         return (
           <InputUnit
@@ -43,19 +44,19 @@ export default function GridDetails() {
             reducer={unitReducer}
             initialState={initialState}
           >
-            <UnitTitle useUnit={useInputUnit}>{`Grid ${index + 1}`}</UnitTitle>
+            <UnitTitle useUnit={useInputUnit}>{`Grid ${order}`}</UnitTitle>
             <UnitTextInput
-              id={`grid-${index + 1}-filename`}
+              id={`grid-${order}-filename`}
               modifyInput={modifyInput}
               useUnit={useInputUnit}
-              keyName={`grid${index + 1}`}
+              keyName={`grid${order}`}
               inputKey="input"
             />
             {hasSwitch && (
               <UnitSwitch
                 toggleVideo={toggleVideo}
                 useUnit={useInputUnit}
-                keyName={`grid${index + 1}`}
+                keyName={`grid${order}`}
               />
             )}
           </InputUnit>
