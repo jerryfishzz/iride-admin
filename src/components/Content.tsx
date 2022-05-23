@@ -16,22 +16,18 @@ import Features from './Features'
 import GridImages from './GridImages'
 import { ContentProvider, contentReducer } from 'context/content'
 
+const gridModel = {
+  url: '',
+  isVideo: false,
+  filename: '',
+}
+
 const initialContent = {
-  grid: {
-    grid1: {
-      url: '',
-      isVideo: false,
-      filename: '',
-    },
-    grid2: {
-      url: '',
-      isVideo: false,
-      filename: '',
-    },
-    grid3: {
-      url: '',
-      isVideo: false,
-      filename: '',
+  input: {
+    grid: {
+      grid1: {...gridModel},
+      grid2: {...gridModel},
+      grid3: {...gridModel},
     },
   },
 }

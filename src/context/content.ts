@@ -11,8 +11,12 @@ interface Grid {
   [key: string]: GridModel
 }
 
-interface InitialContent {
+interface Input {
   grid: Grid
+}
+
+interface ContentType {
+  input: Input
 }
 
 enum ACTION_TYPE {
@@ -25,37 +29,41 @@ type Action =
   | { type: ACTION_TYPE.MODIFY_GRID_INPUT; gridName: string; input: string }
 
 const [useContent, ContentProvider] = createCtx<
-  [InitialContent, Dispatch<Action>]
+  [ContentType, Dispatch<Action>]
 >('ContentContext', '<ContentProvider />')
 
-const contentReducer = (state: InitialContent, action: Action) => {
+const contentReducer = (state: ContentType, action: Action) => {
   switch (action.type) {
     case ACTION_TYPE.TOGGLE_GRID_VIDEO:
       return {
         ...state,
-        grid: {
-          ...state.grid,
-          [action.gridName]: {
-            ...state.grid[action.gridName],
-            isVideo: action.isVideo,
+        input: {
+          grid: {
+            ...state.input.grid,
+            [action.gridName]: {
+              ...state.input.grid[action.gridName],
+              isVideo: action.isVideo,
+            },
           },
-        },
+        }
       }
     case ACTION_TYPE.MODIFY_GRID_INPUT:
       return {
         ...state,
-        grid: {
-          ...state.grid,
-          [action.gridName]: {
-            ...state.grid[action.gridName],
-            url: state.grid[action.gridName].isVideo
-              ? action.input
-              : state.grid[action.gridName].url,
-            filename: !state.grid[action.gridName].isVideo
-              ? action.input
-              : state.grid[action.gridName].filename,
+        input: {
+          grid: {
+            ...state.input.grid,
+            [action.gridName]: {
+              ...state.input.grid[action.gridName],
+              url: state.input.grid[action.gridName].isVideo
+                ? action.input
+                : state.input.grid[action.gridName].url,
+              filename: !state.input.grid[action.gridName].isVideo
+                ? action.input
+                : state.input.grid[action.gridName].filename,
+            },
           },
-        },
+        }
       }
     default:
       throw new Error('Unhandled action type')
