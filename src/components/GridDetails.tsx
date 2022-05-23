@@ -49,14 +49,14 @@ export default function GridDetails() {
               id={`grid-${order}-filename`}
               modifyInput={modifyInput}
               useUnit={useInputUnit}
-              keyName={`grid${order}`}
+              objKey={`grid${order}`}
               inputKey="input"
             />
             {hasSwitch && (
               <UnitSwitch
                 toggleVideo={toggleVideo}
                 useUnit={useInputUnit}
-                keyName={`grid${order}`}
+                objKey={`grid${order}`}
               />
             )}
           </InputUnit>
