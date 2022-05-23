@@ -6,21 +6,23 @@ import {
   useFeature,
 } from 'context/features'
 import { useState } from 'react'
+import { createUniqId } from 'utils/helper'
 import { InitialState, InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
 
-const featureModel = {
+const getFeatureModel = () => ({
+  id: createUniqId(),
   filename: '',
   heading: '',
   description: '',
-}
+})
 
 export default function FeatureDetails() {
   const [initialFeaturesState, setInitialFeaturesState] = useState<
     InitialState[]
-  >([{ ...featureModel }])
+  >(() => [{ ...getFeatureModel() }])
 
   const handleAdd = () => {
-    setInitialFeaturesState(prev => [...prev, { ...featureModel }])
+    setInitialFeaturesState(prev => [...prev, { ...getFeatureModel() }])
   }
 
   return (
@@ -30,7 +32,7 @@ export default function FeatureDetails() {
 
         return (
           <InputUnit
-            key={index}
+            key={initialFeatureState.id}
             UnitContext={FeatureContext}
             reducer={featureReducer}
             initialState={initialFeatureState}

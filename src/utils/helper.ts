@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 // Helper function to create a context without needing to give a default value as the parameter to createContext.
 // The null in generic looks not very useful. Just no idea why it is added here.
@@ -23,4 +24,11 @@ function getKebabCase(str: string): string {
   return str.toLowerCase().replace(' ', '-')
 }
 
-export { createCtx, getKebabCase }
+function createUniqId() {
+  const id = uuidv4()
+  // console.log(`from function: ${id}`)
+
+  return id
+}
+
+export { createCtx, getKebabCase, createUniqId }

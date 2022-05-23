@@ -5,6 +5,7 @@ import {
   unitReducer,
   useInputUnit,
 } from 'context/grid-images'
+import { createUniqId } from 'utils/helper'
 import {
   InputUnit,
   Label,
@@ -13,19 +14,20 @@ import {
   UnitTitle,
 } from './InputUnit'
 
-const gridModel = {
+const getGridModel = () => ({
   hasSwitch: true,
   initialState: {
+    id: createUniqId(),
     input: '',
     isVideo: false,
     label: Label.filename,
   },
-}
+})
 
 const initialGridImagesState = [
-  { ...gridModel, hasSwitch: false },
-  { ...gridModel },
-  { ...gridModel },
+  { ...getGridModel(), hasSwitch: false },
+  { ...getGridModel() },
+  { ...getGridModel() },
 ]
 
 export default function GridDetails() {

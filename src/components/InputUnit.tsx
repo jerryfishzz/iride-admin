@@ -30,6 +30,7 @@ enum Label {
 }
 
 type InitialState = {
+  id: string
   input?: string
   isVideo?: boolean
   label?: Label.filename | Label.url
