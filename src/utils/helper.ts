@@ -26,8 +26,6 @@ function getKebabCase(str: string): string {
 
 function createUniqId() {
   const id = uuidv4()
-  // console.log(`from function: ${id}`)
-
   return id
 }
 

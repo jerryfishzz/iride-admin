@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { createUniqId } from 'utils/helper'
 import { InitialState, InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
 
+// Using function to return the intial state can guarantee the id will be always random
 const getFeatureModel = () => ({
   id: createUniqId(),
   filename: '',
@@ -20,6 +21,8 @@ export default function FeatureDetails() {
   const [initialFeaturesState, setInitialFeaturesState] = useState<
     InitialState[]
   >(() => [{ ...getFeatureModel() }])
+  // Using lazy load here is just to avoid invoking the initial creator and creating useless random id.
+  // Not necessary, just look tidy.
 
   const handleAdd = () => {
     setInitialFeaturesState(prev => [...prev, { ...getFeatureModel() }])
