@@ -30,7 +30,7 @@ type Action =
 
 const [useContent, ContentProvider] = createCtx<
   [ContentType, Dispatch<Action>]
->('ContentContext', '<ContentProvider />')
+>('<ContentProvider />')
 
 const contentReducer = (state: ContentType, action: Action) => {
   switch (action.type) {
@@ -45,7 +45,7 @@ const contentReducer = (state: ContentType, action: Action) => {
               isVideo: action.isVideo,
             },
           },
-        }
+        },
       }
     case ACTION_TYPE.MODIFY_GRID_INPUT:
       return {
@@ -63,7 +63,7 @@ const contentReducer = (state: ContentType, action: Action) => {
                 : state.input.grid[action.gridName].filename,
             },
           },
-        }
+        },
       }
     default:
       throw new Error('Unhandled action type')
@@ -83,7 +83,13 @@ const toggleGridVideo = (
   gridName: string,
   isVideo: boolean
 ) => {
-  dispatch({ type: ACTION_TYPE.TOGGLE_GRID_VIDEO, gridName,isVideo })
+  dispatch({ type: ACTION_TYPE.TOGGLE_GRID_VIDEO, gridName, isVideo })
 }
 
-export { useContent, ContentProvider, contentReducer, modifyGridInput, toggleGridVideo }
+export {
+  useContent,
+  ContentProvider,
+  contentReducer,
+  modifyGridInput,
+  toggleGridVideo,
+}

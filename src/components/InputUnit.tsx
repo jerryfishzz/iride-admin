@@ -7,13 +7,13 @@ import {
 } from '@mui/material'
 import { modifyGridInput, toggleGridVideo, useContent } from 'context/content'
 import {
-  ChangeEvent,
-  Context,
-  Dispatch,
-  ReactNode,
-  useEffect,
-  useReducer,
-} from 'react'
+  InputUnitProvider,
+  inputUnitReducer,
+  modifyInput,
+  toggleVideo,
+  useInputUnit,
+} from 'context/input-unit'
+import { ChangeEvent, ReactNode, useEffect, useReducer } from 'react'
 
 enum ACTION_TYPE {
   TOGGLE_VIDEO = 'TOGGLE_VIDEO',
@@ -38,42 +38,30 @@ type InputUnitType = {
 }
 
 interface InputUnitProps {
-  UnitContext: Context<[InputUnitType, Dispatch<Action>] | undefined>
-  reducer: (state: InputUnitType, action: Action) => InputUnitType
   initialState: InputUnitType
   children: ReactNode
 }
 
 interface UnitTitleProps {
-  useUnit: () => [InputUnitType, Dispatch<Action>]
   children: ReactNode
 }
 
 interface UnitTextInputProps {
   id: string
   label?: string
-  modifyInput: (dispatch: Dispatch<Action>, input: string, key: string) => void
-  useUnit: () => [InputUnitType, Dispatch<Action>]
   objKey?: string
   inputKey: string
 }
 
 interface UnitSwitchProps {
-  toggleVideo: (dispatch: Dispatch<Action>, isVideo: boolean) => void
-  useUnit: () => [InputUnitType, Dispatch<Action>]
   objKey: string
 }
 
-function InputUnit({
-  UnitContext,
-  reducer,
-  initialState,
-  children,
-}: InputUnitProps) {
-  const [state, dispatch] = useReducer(reducer, initialState)
+function InputUnit({ initialState, children }: InputUnitProps) {
+  const [state, dispatch] = useReducer(inputUnitReducer, initialState)
 
   return (
-    <UnitContext.Provider value={[state, dispatch]}>
+    <InputUnitProvider value={[state, dispatch]}>
       <Box
         sx={{
           my: 2,
@@ -81,24 +69,17 @@ function InputUnit({
       >
         {children}
       </Box>
-    </UnitContext.Provider>
+    </InputUnitProvider>
   )
 }
 
-function UnitTitle({ useUnit, children }: UnitTitleProps) {
-  useUnit()
+function UnitTitle({ children }: UnitTitleProps) {
+  useInputUnit('<UnitTitle />')
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({
-  id,
-  label,
-  modifyInput,
-  useUnit,
-  objKey,
-  inputKey,
-}: UnitTextInputProps) {
-  const [state, dispatch] = useUnit()
+function UnitTextInput({ id, label, objKey, inputKey }: UnitTextInputProps) {
+  const [state, dispatch] = useInputUnit('<UnitTextInput />')
   const input = state[inputKey] as string
   const stateLabel = state.label
 
@@ -126,8 +107,8 @@ function UnitTextInput({
   )
 }
 
-function UnitSwitch({ toggleVideo, useUnit, objKey }: UnitSwitchProps) {
-  const [{ input, isVideo }, dispatch] = useUnit()
+function UnitSwitch({ objKey }: UnitSwitchProps) {
+  const [{ input, isVideo }, dispatch] = useInputUnit('<UnitSwitch />')
   const [, contentDispatch] = useContent()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

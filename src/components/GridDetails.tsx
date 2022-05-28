@@ -1,10 +1,3 @@
-import {
-  InputUnitContext,
-  modifyInput,
-  toggleVideo,
-  unitReducer,
-  useInputUnit,
-} from 'context/grid-images'
 import { createUniqId } from 'utils/helper'
 import {
   InputUnit,
@@ -38,27 +31,14 @@ export default function GridDetails() {
         const order = index + 1
 
         return (
-          <InputUnit
-            key={index}
-            UnitContext={InputUnitContext}
-            reducer={unitReducer}
-            initialState={initialState}
-          >
-            <UnitTitle useUnit={useInputUnit}>{`Grid ${order}`}</UnitTitle>
+          <InputUnit key={index} initialState={initialState}>
+            <UnitTitle>{`Grid ${order}`}</UnitTitle>
             <UnitTextInput
               id={`grid-${order}-filename`}
-              modifyInput={modifyInput}
-              useUnit={useInputUnit}
               objKey={`grid${order}`}
               inputKey="input"
             />
-            {hasSwitch && (
-              <UnitSwitch
-                toggleVideo={toggleVideo}
-                useUnit={useInputUnit}
-                objKey={`grid${order}`}
-              />
-            )}
+            {hasSwitch && <UnitSwitch objKey={`grid${order}`} />}
           </InputUnit>
         )
       })}
