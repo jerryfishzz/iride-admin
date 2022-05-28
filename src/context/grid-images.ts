@@ -1,11 +1,11 @@
-import { Action, InitialState, Label, ACTION_TYPE } from 'components/InputUnit'
+import { Action, InputUnitType, Label, ACTION_TYPE } from 'components/InputUnit'
 import { createContext, Dispatch, useContext } from 'react'
 
 const InputUnitContext = createContext<
-  [InitialState, Dispatch<Action>] | undefined
+  [InputUnitType, Dispatch<Action>] | undefined
 >(undefined)
 
-const unitReducer = (state: InitialState, action: Action) => {
+const unitReducer = (state: InputUnitType, action: Action) => {
   switch (action.type) {
     case ACTION_TYPE.TOGGLE_VIDEO:
       return {

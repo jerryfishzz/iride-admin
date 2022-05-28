@@ -29,7 +29,7 @@ enum Label {
   url = 'URL',
 }
 
-type InitialState = {
+type InputUnitType = {
   id: string
   input?: string
   isVideo?: boolean
@@ -38,14 +38,14 @@ type InitialState = {
 }
 
 interface InputUnitProps {
-  UnitContext: Context<[InitialState, Dispatch<Action>] | undefined>
-  reducer: (state: InitialState, action: Action) => InitialState
-  initialState: InitialState
+  UnitContext: Context<[InputUnitType, Dispatch<Action>] | undefined>
+  reducer: (state: InputUnitType, action: Action) => InputUnitType
+  initialState: InputUnitType
   children: ReactNode
 }
 
 interface UnitTitleProps {
-  useUnit: () => [InitialState, Dispatch<Action>]
+  useUnit: () => [InputUnitType, Dispatch<Action>]
   children: ReactNode
 }
 
@@ -53,14 +53,14 @@ interface UnitTextInputProps {
   id: string
   label?: string
   modifyInput: (dispatch: Dispatch<Action>, input: string, key: string) => void
-  useUnit: () => [InitialState, Dispatch<Action>]
+  useUnit: () => [InputUnitType, Dispatch<Action>]
   objKey?: string
   inputKey: string
 }
 
 interface UnitSwitchProps {
   toggleVideo: (dispatch: Dispatch<Action>, isVideo: boolean) => void
-  useUnit: () => [InitialState, Dispatch<Action>]
+  useUnit: () => [InputUnitType, Dispatch<Action>]
   objKey: string
 }
 
@@ -162,4 +162,4 @@ function UnitSwitch({ toggleVideo, useUnit, objKey }: UnitSwitchProps) {
 }
 
 export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, Label, ACTION_TYPE }
-export type { Action, InitialState }
+export type { Action, InputUnitType }
