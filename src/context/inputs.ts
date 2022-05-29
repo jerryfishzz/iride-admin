@@ -35,7 +35,6 @@ type Action =
   | { type: ACTION_TYPE.MODIFY_GRID_INPUT; gridName: string; input: string }
   | {
       type: ACTION_TYPE.MODIFY_FEATURE_INPUT
-      groupName: string
       input: string
       inputKey: string
       id: string
@@ -117,14 +116,12 @@ const toggleGridVideo = (
 
 const modifyFeatureInput = (
   dispatch: Dispatch<Action>,
-  groupName: string,
   input: string,
   inputKey: string,
   id: string
 ) => {
   dispatch({
     type: ACTION_TYPE.MODIFY_FEATURE_INPUT,
-    groupName,
     input,
     inputKey,
     id,

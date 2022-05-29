@@ -5,7 +5,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { modifyGridInput, toggleGridVideo, useInputs } from 'context/inputs'
+import {
+  modifyFeatureInput,
+  modifyGridInput,
+  toggleGridVideo,
+  useInputs,
+} from 'context/inputs'
 import {
   InputUnitProvider,
   inputUnitReducer,
@@ -91,9 +96,13 @@ function UnitTextInput({ id, label, handler, inputKey }: UnitTextInputProps) {
 
   useEffect(() => {
     if (handler) {
-      modifyGridInput(inputsDispatch, handler, input)
+      if (handler.includes('grid'))
+        modifyGridInput(inputsDispatch, handler, input)
+
+      if (handler.includes('feature'))
+        modifyFeatureInput(inputsDispatch, input, inputKey, state.id)
     }
-  }, [inputsDispatch, handler, id, input])
+  }, [inputsDispatch, handler, id, input, inputKey, state.id])
 
   return (
     <TextField

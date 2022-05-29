@@ -45,16 +45,19 @@ export default function FeatureDetails() {
             <UnitTextInput
               id={`feature-${order}-filename`}
               label="Filename"
+              handler={`feature${order}`}
               inputKey="filename"
             />
             <UnitTextInput
               id={`feature-${order}-heading`}
               label="Heading"
+              handler={`feature${order}`}
               inputKey="heading"
             />
             <UnitTextInput
               id={`feature-${order}-description`}
               label="Description"
+              handler={`feature${order}`}
               inputKey="description"
             />
           </InputUnit>
