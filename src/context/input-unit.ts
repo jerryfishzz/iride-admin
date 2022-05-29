@@ -4,7 +4,7 @@ import { createCtx } from 'utils/helper'
 
 const [useInputUnit, InputUnitProvider] = createCtx<
   [InputUnitType, Dispatch<Action>]
->('<InputUnitProvider />')
+>('<InputUnitProvider />', 'InputUnitProvider')
 
 const inputUnitReducer = (state: InputUnitType, action: Action) => {
   switch (action.type) {

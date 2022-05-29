@@ -24,9 +24,10 @@ type Action =
   | { type: ACTION_TYPE.TOGGLE_GRID_VIDEO; gridName: string; isVideo: boolean }
   | { type: ACTION_TYPE.MODIFY_GRID_INPUT; gridName: string; input: string }
 
-const [useInputs, InputsProvider] = createCtx<
-  [InputsType, Dispatch<Action>]
->('<InputsProvider />')
+const [useInputs, InputsProvider] = createCtx<[InputsType, Dispatch<Action>]>(
+  '<InputsProvider />',
+  'InputsProvider'
+)
 
 const inputsReducer = (state: InputsType, action: Action) => {
   switch (action.type) {

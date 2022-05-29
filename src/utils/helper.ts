@@ -4,8 +4,16 @@ import { v4 as uuidv4 } from 'uuid'
 // Helper function to create a context without needing to give a default value as the parameter to createContext.
 // The null in generic looks not very useful. Just no idea why it is added here.
 // https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context/
-function createCtx<A extends {} | null>(providerName: string) {
+function createCtx<A extends {} | null>(
+  providerName: string,
+  displayName?: string
+) {
   const ctx = createContext<A | undefined>(undefined)
+
+  if (ctx && displayName) {
+    ctx.displayName = displayName
+  }
+
   function useCtx(componentName: string = 'Composite component') {
     const c = useContext(ctx)
     if (c === undefined)
