@@ -35,10 +35,10 @@ export default function GridDetails() {
             <UnitTitle>{`Grid ${order}`}</UnitTitle>
             <UnitTextInput
               id={`grid-${order}-filename`}
-              objKey={`grid${order}`}
+              handler={`grid${order}`}
               inputKey="input"
             />
-            {hasSwitch && <UnitSwitch objKey={`grid${order}`} />}
+            {hasSwitch && <UnitSwitch handler={`grid${order}`} />}
           </InputUnit>
         )
       })}

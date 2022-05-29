@@ -49,12 +49,12 @@ interface UnitTitleProps {
 interface UnitTextInputProps {
   id: string
   label?: string
-  objKey?: string
+  handler?: string
   inputKey: string
 }
 
 interface UnitSwitchProps {
-  objKey: string
+  handler: string
 }
 
 function InputUnit({ initialState, children }: InputUnitProps) {
@@ -78,7 +78,7 @@ function UnitTitle({ children }: UnitTitleProps) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id, label, objKey, inputKey }: UnitTextInputProps) {
+function UnitTextInput({ id, label, handler, inputKey }: UnitTextInputProps) {
   const [state, dispatch] = useInputUnit('<UnitTextInput />')
   const input = state[inputKey] as string
   const stateLabel = state.label
@@ -90,10 +90,10 @@ function UnitTextInput({ id, label, objKey, inputKey }: UnitTextInputProps) {
   }
 
   useEffect(() => {
-    if (objKey) {
-      modifyGridInput(inputsDispatch, objKey, input)
+    if (handler) {
+      modifyGridInput(inputsDispatch, handler, input)
     }
-  }, [inputsDispatch, objKey, id, input])
+  }, [inputsDispatch, handler, id, input])
 
   return (
     <TextField
@@ -107,7 +107,7 @@ function UnitTextInput({ id, label, objKey, inputKey }: UnitTextInputProps) {
   )
 }
 
-function UnitSwitch({ objKey }: UnitSwitchProps) {
+function UnitSwitch({ handler }: UnitSwitchProps) {
   const [{ input, isVideo }, dispatch] = useInputUnit('<UnitSwitch />')
   const [, inputsDispatch] = useInputs()
 
@@ -117,10 +117,10 @@ function UnitSwitch({ objKey }: UnitSwitchProps) {
 
   useEffect(() => {
     if (isVideo !== undefined && input !== undefined) {
-      toggleGridVideo(inputsDispatch, objKey, isVideo)
-      modifyGridInput(inputsDispatch, objKey, input)
+      toggleGridVideo(inputsDispatch, handler, isVideo)
+      modifyGridInput(inputsDispatch, handler, input)
     }
-  }, [inputsDispatch, input, isVideo, objKey])
+  }, [inputsDispatch, input, isVideo, handler])
 
   return (
     <Box
