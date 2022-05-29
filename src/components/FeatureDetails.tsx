@@ -1,5 +1,10 @@
 import { Button } from '@mui/material'
-import { FeaturSlide, getIntialFeature, useInputs } from 'context/inputs'
+import {
+  FeaturSlide,
+  getIntialFeature,
+  useInputs,
+  addFeature,
+} from 'context/inputs'
 import { useEffect, useState } from 'react'
 import { createUniqId } from 'utils/helper'
 import { InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
@@ -15,16 +20,18 @@ const getFeatureModel = () => ({
 const initialFeaturesState = [getFeatureModel()]
 
 export default function FeatureDetails() {
-  const [featuresState, setFeaturesState] = useState<
-    FeaturSlide[]
-  >(initialFeaturesState)
+  const [featuresState, setFeaturesState] =
+    useState<FeaturSlide[]>(initialFeaturesState)
   // Using lazy load here is just to avoid invoking the initial creator and creating useless random id.
   // Not necessary, just look tidy.
 
   const [, dispatch] = useInputs()
 
   const handleAdd = () => {
-    setFeaturesState(prev => [...prev, { ...getFeatureModel() }])
+    const newFeature = getFeatureModel()
+
+    setFeaturesState(prev => [...prev, newFeature])
+    addFeature(dispatch, newFeature)
   }
 
   useEffect(() => {

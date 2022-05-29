@@ -28,6 +28,7 @@ enum ACTION_TYPE {
   MODIFY_GRID_INPUT = 'MODIFY_GRID_INPUT',
   MODIFY_FEATURE_INPUT = 'MODIFY_FEATURE_INPUT',
   GET_INITIAL_FEATURE = 'GET_INITIAL_FEATURE',
+  ADD_FEATURE = 'ADD_FEATURE',
 }
 
 type Action =
@@ -40,6 +41,7 @@ type Action =
       id: string
     }
   | { type: ACTION_TYPE.GET_INITIAL_FEATURE; initialFeature: FeaturSlide[] }
+  | { type: ACTION_TYPE.ADD_FEATURE; newFeature: FeaturSlide }
 
 const [useInputs, InputsProvider] = createCtx<[InputsType, Dispatch<Action>]>(
   '<InputsProvider />',
@@ -93,6 +95,11 @@ const inputsReducer = (state: InputsType, action: Action) => {
         ...state,
         featureSlides: action.initialFeature,
       }
+    case ACTION_TYPE.ADD_FEATURE:
+      return {
+        ...state,
+        featureSlides: [...state.featureSlides, action.newFeature],
+      }
     default:
       throw new Error('Unhandled action type')
   }
@@ -135,6 +142,10 @@ const getIntialFeature = (
   dispatch({ type: ACTION_TYPE.GET_INITIAL_FEATURE, initialFeature })
 }
 
+const addFeature = (dispatch: Dispatch<Action>, newFeature: FeaturSlide) => {
+  dispatch({ type: ACTION_TYPE.ADD_FEATURE, newFeature })
+}
+
 export {
   useInputs,
   InputsProvider,
@@ -143,6 +154,7 @@ export {
   toggleGridVideo,
   modifyFeatureInput,
   getIntialFeature,
+  addFeature,
 }
 
 export type { FeaturSlide }
