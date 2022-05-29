@@ -14,7 +14,7 @@ function createCtx<A extends {} | null>(
     ctx.displayName = displayName
   }
 
-  function useCtx(componentName: string = 'Composite component') {
+  function useCtx(componentName: string = 'Consumer components') {
     const c = useContext(ctx)
     if (c === undefined)
       throw new Error(

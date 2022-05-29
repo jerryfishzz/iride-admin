@@ -22,18 +22,19 @@ const gridModel = {
   filename: '',
 }
 
-const initialContent = {
+const initialInputs = {
   grid: {
     grid1: { ...gridModel },
     grid2: { ...gridModel },
     grid3: { ...gridModel },
   },
+  featureSlides: [],
 }
 
 export default function Content() {
   const [inputs, inputsDispatch] = React.useReducer(
     inputsReducer,
-    initialContent
+    initialInputs
   )
 
   const handleChangeContent = (e: React.MouseEvent) => {

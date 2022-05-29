@@ -1,7 +1,8 @@
 import { Button } from '@mui/material'
-import { useState } from 'react'
+import { FeaturSlide, getIntialFeature, useInputs } from 'context/inputs'
+import { useEffect, useState } from 'react'
 import { createUniqId } from 'utils/helper'
-import { InputUnitType, InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
+import { InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
 
 // Using function to return the intial state can guarantee the id will be always random
 const getFeatureModel = () => ({
@@ -11,20 +12,28 @@ const getFeatureModel = () => ({
   description: '',
 })
 
+const initialFeaturesState = [getFeatureModel()]
+
 export default function FeatureDetails() {
-  const [initialFeaturesState, setInitialFeaturesState] = useState<
-    InputUnitType[]
-  >(() => [{ ...getFeatureModel() }])
+  const [featuresState, setFeaturesState] = useState<
+    FeaturSlide[]
+  >(initialFeaturesState)
   // Using lazy load here is just to avoid invoking the initial creator and creating useless random id.
   // Not necessary, just look tidy.
 
+  const [, dispatch] = useInputs()
+
   const handleAdd = () => {
-    setInitialFeaturesState(prev => [...prev, { ...getFeatureModel() }])
+    setFeaturesState(prev => [...prev, { ...getFeatureModel() }])
   }
+
+  useEffect(() => {
+    getIntialFeature(dispatch, initialFeaturesState)
+  }, [dispatch])
 
   return (
     <>
-      {initialFeaturesState.map((initialFeatureState, index) => {
+      {featuresState.map((initialFeatureState, index) => {
         const order = index + 1
 
         return (
