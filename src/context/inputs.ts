@@ -1,22 +1,18 @@
 import { Dispatch } from 'react'
 import { createCtx } from 'utils/helper'
 
-interface GridModel {
+interface GridType {
   url: string
   isVideo: boolean
   filename: string
 }
 
-interface Grid {
-  [key: string]: GridModel
+interface GridImagesType {
+  [key: string]: GridType
 }
 
-interface Input {
-  grid: Grid
-}
-
-interface ContentType {
-  input: Input
+interface InputsType {
+  gridImages: GridImagesType
 }
 
 enum ACTION_TYPE {
@@ -28,40 +24,36 @@ type Action =
   | { type: ACTION_TYPE.TOGGLE_GRID_VIDEO; gridName: string; isVideo: boolean }
   | { type: ACTION_TYPE.MODIFY_GRID_INPUT; gridName: string; input: string }
 
-const [useContent, ContentProvider] = createCtx<
-  [ContentType, Dispatch<Action>]
->('<ContentProvider />')
+const [useInputs, InputsProvider] = createCtx<
+  [InputsType, Dispatch<Action>]
+>('<InputsProvider />')
 
-const contentReducer = (state: ContentType, action: Action) => {
+const inputsReducer = (state: InputsType, action: Action) => {
   switch (action.type) {
     case ACTION_TYPE.TOGGLE_GRID_VIDEO:
       return {
         ...state,
-        input: {
-          grid: {
-            ...state.input.grid,
-            [action.gridName]: {
-              ...state.input.grid[action.gridName],
-              isVideo: action.isVideo,
-            },
+        gridImages: {
+          ...state.gridImages,
+          [action.gridName]: {
+            ...state.gridImages[action.gridName],
+            isVideo: action.isVideo,
           },
         },
       }
     case ACTION_TYPE.MODIFY_GRID_INPUT:
       return {
         ...state,
-        input: {
-          grid: {
-            ...state.input.grid,
-            [action.gridName]: {
-              ...state.input.grid[action.gridName],
-              url: state.input.grid[action.gridName].isVideo
-                ? action.input
-                : state.input.grid[action.gridName].url,
-              filename: !state.input.grid[action.gridName].isVideo
-                ? action.input
-                : state.input.grid[action.gridName].filename,
-            },
+        gridImages: {
+          ...state.gridImages,
+          [action.gridName]: {
+            ...state.gridImages[action.gridName],
+            url: state.gridImages[action.gridName].isVideo
+              ? action.input
+              : state.gridImages[action.gridName].url,
+            filename: !state.gridImages[action.gridName].isVideo
+              ? action.input
+              : state.gridImages[action.gridName].filename,
           },
         },
       }
@@ -87,9 +79,9 @@ const toggleGridVideo = (
 }
 
 export {
-  useContent,
-  ContentProvider,
-  contentReducer,
+  useInputs,
+  InputsProvider,
+  inputsReducer,
   modifyGridInput,
   toggleGridVideo,
 }

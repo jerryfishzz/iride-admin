@@ -14,7 +14,7 @@ import { Box } from '@mui/material'
 import LoneInput from './LoneInput'
 import Features from './Features'
 import GridImages from './GridImages'
-import { ContentProvider, contentReducer } from 'context/content'
+import { InputsProvider, inputsReducer } from 'context/inputs'
 
 const gridModel = {
   url: '',
@@ -23,18 +23,16 @@ const gridModel = {
 }
 
 const initialContent = {
-  input: {
-    grid: {
-      grid1: {...gridModel},
-      grid2: {...gridModel},
-      grid3: {...gridModel},
-    },
+  gridImages: {
+    grid1: { ...gridModel },
+    grid2: { ...gridModel },
+    grid3: { ...gridModel },
   },
 }
 
 export default function Content() {
-  const [content, contentDispatch] = React.useReducer(
-    contentReducer,
+  const [inputs, inputsDispatch] = React.useReducer(
+    inputsReducer,
     initialContent
   )
 
@@ -143,13 +141,13 @@ export default function Content() {
           autoComplete="off"
           onSubmit={generateJSON}
         >
-          <ContentProvider value={[content, contentDispatch]}>
+          <InputsProvider value={[inputs, inputsDispatch]}>
             <LoneInput title="Subtitle" />
             <GridImages />
             <Features />
             <LoneInput title="Fit" />
             <LoneInput title="Sizing" />
-          </ContentProvider>
+          </InputsProvider>
 
           <Button type="submit" onClick={handleChangeContent}>
             Submit
