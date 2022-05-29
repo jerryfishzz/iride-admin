@@ -23,7 +23,7 @@ const gridModel = {
 }
 
 const initialContent = {
-  gridImages: {
+  grid: {
     grid1: { ...gridModel },
     grid2: { ...gridModel },
     grid3: { ...gridModel },

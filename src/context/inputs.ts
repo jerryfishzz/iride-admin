@@ -12,7 +12,7 @@ interface GridImagesType {
 }
 
 interface InputsType {
-  gridImages: GridImagesType
+  grid: GridImagesType
 }
 
 enum ACTION_TYPE {
@@ -34,10 +34,10 @@ const inputsReducer = (state: InputsType, action: Action) => {
     case ACTION_TYPE.TOGGLE_GRID_VIDEO:
       return {
         ...state,
-        gridImages: {
-          ...state.gridImages,
+        grid: {
+          ...state.grid,
           [action.gridName]: {
-            ...state.gridImages[action.gridName],
+            ...state.grid[action.gridName],
             isVideo: action.isVideo,
           },
         },
@@ -45,16 +45,16 @@ const inputsReducer = (state: InputsType, action: Action) => {
     case ACTION_TYPE.MODIFY_GRID_INPUT:
       return {
         ...state,
-        gridImages: {
-          ...state.gridImages,
+        grid: {
+          ...state.grid,
           [action.gridName]: {
-            ...state.gridImages[action.gridName],
-            url: state.gridImages[action.gridName].isVideo
+            ...state.grid[action.gridName],
+            url: state.grid[action.gridName].isVideo
               ? action.input
-              : state.gridImages[action.gridName].url,
-            filename: !state.gridImages[action.gridName].isVideo
+              : state.grid[action.gridName].url,
+            filename: !state.grid[action.gridName].isVideo
               ? action.input
-              : state.gridImages[action.gridName].filename,
+              : state.grid[action.gridName].filename,
           },
         },
       }
