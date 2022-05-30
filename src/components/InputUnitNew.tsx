@@ -81,7 +81,7 @@ function UnitTitle({ children }: UnitTitleProps) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id, handler }: UnitTextInputProps) {
+function UnitTextInput({ id }: UnitTextInputProps) {
   const [state, dispatch] = useInputs('<UnitTextInput />')
   const [label, setLabel] = useState<string>('')
 
