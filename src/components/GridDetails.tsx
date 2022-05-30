@@ -34,7 +34,7 @@ export default function GridDetails() {
           <InputUnit key={index} initialState={initialState}>
             <UnitTitle>{`Grid ${order}`}</UnitTitle>
             <UnitTextInput
-              id={`grid-${order}-filename`}
+              id={`grid-${order}-input`}
               handler={`grid${order}`}
               inputKey="input"
             />

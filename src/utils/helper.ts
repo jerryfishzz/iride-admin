@@ -1,3 +1,5 @@
+import { InputUnitType } from 'components/InputUnit'
+import { InputsType } from 'context/inputs'
 import { createContext, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -34,4 +36,44 @@ function createUniqId() {
   return id
 }
 
-export { createCtx, getKebabCase, createUniqId }
+function splidId(id: string) {
+  return id.split('-')
+}
+
+function capitalizedWord(word: string) {
+  return word.charAt(0).toUpperCase + word.slice(1)
+}
+
+enum GroupName {
+  grid = 'grid',
+  feature = 'feature',
+}
+
+function getInputUnitState(
+  state: InputsType,
+  groupName: GroupName,
+  index: string,
+  inputKey: string
+) {
+  switch (groupName) {
+    case GroupName.grid:
+      return {
+        inputUnitState: state.grid[`grid${index}`],
+        input: state.grid[`grid${index}`].isVideo
+          ? state.grid[`grid${index}`].url
+          : state.grid[`grid${index}`].filename,
+      }
+    case GroupName.feature:
+      return {}
+  }
+}
+
+export {
+  createCtx,
+  getKebabCase,
+  createUniqId,
+  splidId,
+  getInputUnitState,
+  GroupName,
+  capitalizedWord,
+}

@@ -157,4 +157,4 @@ export {
   addFeature,
 }
 
-export type { FeaturSlide }
+export type { FeaturSlide, InputsType }
