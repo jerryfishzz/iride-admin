@@ -52,16 +52,16 @@ enum GroupName {
 function getInputUnitState(
   state: InputsType,
   groupName: GroupName,
-  index: string,
+  order: string,
   inputKey: string
 ) {
   switch (groupName) {
     case GroupName.grid:
       return {
-        inputUnitState: state.grid[`grid${index}`],
-        input: state.grid[`grid${index}`].isVideo
-          ? state.grid[`grid${index}`].url
-          : state.grid[`grid${index}`].filename,
+        inputUnitState: state.grid[`grid${order}`],
+        input: state.grid[`grid${order}`].isVideo
+          ? state.grid[`grid${order}`].url
+          : state.grid[`grid${order}`].filename,
       }
     case GroupName.feature:
       return {}

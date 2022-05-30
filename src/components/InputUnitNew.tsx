@@ -84,18 +84,18 @@ function UnitTextInput({ id, handler }: UnitTextInputProps) {
   const [state, dispatch] = useInputs('<UnitTextInput />')
   const [label, setLabel] = useState<string>('')
 
-  const [groupName, index, inputKey] = splidId(id)
+  const [groupName, order, inputKey] = splidId(id)
 
   const { inputUnitState, input } = getInputUnitState?.(
     state,
     groupName as GroupName,
-    index,
+    order,
     inputKey
   )
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (groupName === GroupName.grid)
-      modifyGridInput(dispatch, groupName + index, e.target.value)
+      modifyGridInput(dispatch, groupName + order, e.target.value)
   }
 
   useEffect(() => {
