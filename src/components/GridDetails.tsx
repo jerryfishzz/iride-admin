@@ -38,7 +38,7 @@ export default function GridDetails() {
               handler={`grid${order}`}
               inputKey="input"
             />
-            {hasSwitch && <UnitSwitch handler={`grid${order}`} />}
+            {hasSwitch && <UnitSwitch id={`grid-${order}-video`} handler={`grid${order}`} />}
           </InputUnit>
         )
       })}

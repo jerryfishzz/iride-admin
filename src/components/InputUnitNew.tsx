@@ -51,17 +51,6 @@ interface UnitTitleProps {
   children: ReactNode
 }
 
-interface UnitTextInputProps {
-  id: string
-  label?: string
-  handler?: string
-  inputKey: string
-}
-
-interface UnitSwitchProps {
-  handler: string
-}
-
 function InputUnit({ children }: InputUnitProps) {
   return (
     <InputUnitProvider value={{}}>
@@ -81,7 +70,7 @@ function UnitTitle({ children }: UnitTitleProps) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id }: UnitTextInputProps) {
+function UnitTextInput({ id }: { id: string }) {
   const [state, dispatch] = useInputs('<UnitTextInput />')
   const [label, setLabel] = useState<string>('')
 
@@ -99,7 +88,12 @@ function UnitTextInput({ id }: UnitTextInputProps) {
       modifyGridInput(dispatch, groupName + order, e.target.value)
 
     if (groupName === GroupName.feature)
-      modifyFeatureInput(dispatch, e.target.value, inputKey, (inputUnitState as FeaturSlide).id)
+      modifyFeatureInput(
+        dispatch,
+        e.target.value,
+        inputKey,
+        (inputUnitState as FeaturSlide).id
+      )
   }
 
   useEffect(() => {
@@ -122,20 +116,18 @@ function UnitTextInput({ id }: UnitTextInputProps) {
   )
 }
 
-function UnitSwitch({ handler }: UnitSwitchProps) {
-  const [{ input, isVideo }, dispatch] = useInputUnit('<UnitSwitch />')
-  const [, inputsDispatch] = useInputs()
+function UnitSwitch({ id }: { id: string }) {
+  const [state, dispatch] = useInputs('<UnitSwitch />')
+
+  const [groupName, order, inputKey] = splidId(id)
+
+  const {
+    inputUnitState: { isVideo },
+  } = getInputUnitState?.(state, groupName as GroupName.grid, order, inputKey)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    toggleVideo(dispatch, e.target.checked)
+    toggleGridVideo(dispatch, groupName + order, e.target.checked)
   }
-
-  useEffect(() => {
-    if (isVideo !== undefined && input !== undefined) {
-      toggleGridVideo(inputsDispatch, handler, isVideo)
-      modifyGridInput(inputsDispatch, handler, input)
-    }
-  }, [inputsDispatch, input, isVideo, handler])
 
   return (
     <Box
