@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@mui/material'
 import {
+  FeaturSlide,
   modifyFeatureInput,
   modifyGridInput,
   toggleGridVideo,
@@ -96,6 +97,9 @@ function UnitTextInput({ id, handler }: UnitTextInputProps) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (groupName === GroupName.grid)
       modifyGridInput(dispatch, groupName + order, e.target.value)
+
+    if (groupName === GroupName.feature)
+      modifyFeatureInput(dispatch, e.target.value, inputKey, (inputUnitState as FeaturSlide).id)
   }
 
   useEffect(() => {

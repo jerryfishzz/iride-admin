@@ -55,6 +55,8 @@ function getInputUnitState(
   order: string,
   inputKey: string
 ) {
+  const index = parseInt(order) - 1
+
   switch (groupName) {
     case GroupName.grid:
       return {
@@ -64,7 +66,10 @@ function getInputUnitState(
           : state.grid[`grid${order}`].filename,
       }
     case GroupName.feature:
-      return {}
+      return {
+        inputUnitState: state.featureSlides[index],
+        input: state.featureSlides[index][inputKey],
+      }
   }
 }
 
