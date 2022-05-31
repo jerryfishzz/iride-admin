@@ -40,7 +40,6 @@ type Action =
       inputKey: string
       id: string
     }
-  | { type: ACTION_TYPE.GET_INITIAL_FEATURE; initialFeature: FeaturSlide[] }
   | { type: ACTION_TYPE.ADD_FEATURE; newFeature: FeaturSlide }
 
 const [useInputs, InputsProvider] = createCtx<[InputsType, Dispatch<Action>]>(
@@ -90,11 +89,6 @@ const inputsReducer = (state: InputsType, action: Action) => {
           return featureSlide
         }),
       }
-    case ACTION_TYPE.GET_INITIAL_FEATURE:
-      return {
-        ...state,
-        featureSlides: action.initialFeature,
-      }
     case ACTION_TYPE.ADD_FEATURE:
       return {
         ...state,
@@ -135,13 +129,6 @@ const modifyFeatureInput = (
   })
 }
 
-const getIntialFeature = (
-  dispatch: Dispatch<Action>,
-  initialFeature: FeaturSlide[]
-) => {
-  dispatch({ type: ACTION_TYPE.GET_INITIAL_FEATURE, initialFeature })
-}
-
 const addFeature = (dispatch: Dispatch<Action>, newFeature: FeaturSlide) => {
   dispatch({ type: ACTION_TYPE.ADD_FEATURE, newFeature })
 }
@@ -153,7 +140,6 @@ export {
   modifyGridInput,
   toggleGridVideo,
   modifyFeatureInput,
-  getIntialFeature,
   addFeature,
 }
 
