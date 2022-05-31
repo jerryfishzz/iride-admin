@@ -6,20 +6,19 @@ import {
   Typography,
 } from '@mui/material'
 import {
-  FeaturSlide,
   modifyFeatureInput,
   modifyGridInput,
   toggleGridVideo,
   useInputs,
 } from 'context/inputs'
-import { InputUnitProvider, useInputUnit } from 'context/input-unit-new'
-import { ChangeEvent, ReactNode, useEffect, useReducer, useState } from 'react'
 import {
-  capitalizedWord,
-  getInputUnitState,
-  GroupName,
-  splidId,
-} from 'utils/helper'
+  InputUnitProvider,
+  inputUnitReducer,
+  modifyInput,
+  toggleVideo,
+  useInputUnit,
+} from 'archive/context/input-unit'
+import { ChangeEvent, ReactNode, useEffect, useReducer } from 'react'
 
 enum ACTION_TYPE {
   TOGGLE_VIDEO = 'TOGGLE_VIDEO',
@@ -44,6 +43,7 @@ type InputUnitType = {
 }
 
 interface InputUnitProps {
+  initialState: InputUnitType
   children: ReactNode
 }
 
@@ -51,9 +51,22 @@ interface UnitTitleProps {
   children: ReactNode
 }
 
-function InputUnit({ children }: InputUnitProps) {
+interface UnitTextInputProps {
+  id: string
+  label?: string
+  handler?: string
+  inputKey: string
+}
+
+interface UnitSwitchProps {
+  handler: string
+}
+
+function InputUnit({ initialState, children }: InputUnitProps) {
+  const [state, dispatch] = useReducer(inputUnitReducer, initialState)
+
   return (
-    <InputUnitProvider value={{}}>
+    <InputUnitProvider value={[state, dispatch]}>
       <Box
         sx={{
           my: 2,
@@ -70,44 +83,31 @@ function UnitTitle({ children }: UnitTitleProps) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function UnitTextInput({ id }: { id: string }) {
-  const [state, dispatch] = useInputs('<UnitTextInput />')
-  const [label, setLabel] = useState<string>('')
+function UnitTextInput({ id, label, handler, inputKey }: UnitTextInputProps) {
+  const [state, dispatch] = useInputUnit('<UnitTextInput />')
+  const input = state[inputKey] as string
+  const stateLabel = state.label
 
-  const [groupName, order, inputKey] = splidId(id)
-
-  const { inputUnitState, input } = getInputUnitState?.(
-    state,
-    groupName as GroupName,
-    order,
-    inputKey
-  )
+  const [, inputsDispatch] = useInputs()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (groupName === GroupName.grid)
-      modifyGridInput(dispatch, groupName + order, e.target.value)
-
-    if (groupName === GroupName.feature)
-      modifyFeatureInput(
-        dispatch,
-        e.target.value,
-        inputKey,
-        (inputUnitState as FeaturSlide).id
-      )
+    modifyInput(dispatch, e.target.value, inputKey)
   }
 
   useEffect(() => {
-    if (groupName === GroupName.grid) {
-      inputUnitState?.isVideo ? setLabel(Label.url) : setLabel(Label.filename)
-    } else {
-      setLabel(capitalizedWord(inputKey))
+    if (handler) {
+      if (handler.includes('grid'))
+        modifyGridInput(inputsDispatch, handler, input)
+
+      if (handler.includes('feature'))
+        modifyFeatureInput(inputsDispatch, input, inputKey, state.id)
     }
-  }, [groupName, inputKey, inputUnitState?.isVideo])
+  }, [inputsDispatch, handler, id, input, inputKey, state.id])
 
   return (
     <TextField
       id={id}
-      label={label}
+      label={label ? label : stateLabel}
       variant="standard"
       fullWidth
       value={input}
@@ -116,18 +116,20 @@ function UnitTextInput({ id }: { id: string }) {
   )
 }
 
-function UnitSwitch({ id }: { id: string }) {
-  const [state, dispatch] = useInputs('<UnitSwitch />')
-
-  const [groupName, order, inputKey] = splidId(id)
-
-  const {
-    inputUnitState: { isVideo },
-  } = getInputUnitState?.(state, groupName as GroupName.grid, order, inputKey)
+function UnitSwitch({ handler }: UnitSwitchProps) {
+  const [{ input, isVideo }, dispatch] = useInputUnit('<UnitSwitch />')
+  const [, inputsDispatch] = useInputs()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    toggleGridVideo(dispatch, groupName + order, e.target.checked)
+    toggleVideo(dispatch, e.target.checked)
   }
+
+  useEffect(() => {
+    if (isVideo !== undefined && input !== undefined) {
+      toggleGridVideo(inputsDispatch, handler, isVideo)
+      modifyGridInput(inputsDispatch, handler, input)
+    }
+  }, [inputsDispatch, input, isVideo, handler])
 
   return (
     <Box

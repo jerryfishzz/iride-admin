@@ -7,7 +7,7 @@ import {
 } from 'context/inputs'
 import { useEffect, useState } from 'react'
 import { createUniqId } from 'utils/helper'
-import { InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
+import { InputUnit, UnitTextInput, UnitTitle } from '../archive/components/InputUnit'
 
 // Using function to return the intial state can guarantee the id will be always random
 const getFeatureModel = () => ({

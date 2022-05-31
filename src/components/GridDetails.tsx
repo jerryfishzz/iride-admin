@@ -1,44 +1,31 @@
-import { createUniqId } from 'utils/helper'
+import { useInputs } from 'context/inputs'
 import {
   InputUnit,
-  Label,
   UnitSwitch,
   UnitTextInput,
   UnitTitle,
 } from './InputUnit'
 
-const getGridModel = () => ({
-  hasSwitch: true,
-  initialState: {
-    id: createUniqId(),
-    input: '',
-    isVideo: false,
-    label: Label.filename,
-  },
-})
-
-const initialGridImagesState = [
-  { ...getGridModel(), hasSwitch: false },
-  { ...getGridModel() },
-  { ...getGridModel() },
-]
-
 export default function GridDetails() {
+  const [state] = useInputs()
+
   return (
     <>
-      {initialGridImagesState.map((initialGridImageState, index) => {
-        const { hasSwitch, initialState } = initialGridImageState
+      {Object.values(state.grid).map((grid, index) => {
+        const { url, isVideo, filename } = grid
         const order = index + 1
 
         return (
-          <InputUnit key={index} initialState={initialState}>
+          <InputUnit key={index}>
             <UnitTitle>{`Grid ${order}`}</UnitTitle>
             <UnitTextInput
               id={`grid-${order}-input`}
-              handler={`grid${order}`}
-              inputKey="input"
+              input={isVideo ? url : filename}
+              isVideo={isVideo}
             />
-            {hasSwitch && <UnitSwitch id={`grid-${order}-video`} handler={`grid${order}`} />}
+            {index > 0 && (
+              <UnitSwitch id={`grid-${order}-video`} isVideo={isVideo} />
+            )}
           </InputUnit>
         )
       })}

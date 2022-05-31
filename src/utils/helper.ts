@@ -1,4 +1,4 @@
-import { InputUnitType } from 'components/InputUnit'
+import { InputUnitType } from 'archive/components/InputUnit'
 import { InputsType } from 'context/inputs'
 import { createContext, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid'
