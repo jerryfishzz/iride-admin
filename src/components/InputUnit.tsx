@@ -56,6 +56,20 @@ function UnitTitle({ children }: { children: ReactNode }) {
   return <Typography variant="h6">{children}</Typography>
 }
 
+function useLabel(groupName: string, inputKey: string, isVideo?: boolean) {
+  const [label, setLabel] = useState<string>('')
+
+  useEffect(() => {
+    if (groupName === GroupName.grid && isVideo !== undefined) {
+      isVideo ? setLabel(Label.url) : setLabel(Label.filename)
+    } else {
+      setLabel(capitalizedWord(inputKey))
+    }
+  }, [groupName, inputKey, isVideo])
+
+  return [label]
+}
+
 function UnitTextInput({
   id,
   input,
@@ -69,9 +83,9 @@ function UnitTextInput({
 }) {
   useInputUnit('<UnitTextInput />')
   const [, dispatch] = useInputs('<UnitTextInput />')
-  const [label, setLabel] = useState<string>('')
 
   const [groupName, order, inputKey] = splidId(id)
+  const [label] = useLabel(groupName, inputKey, isVideo)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (groupName === GroupName.grid)
@@ -80,14 +94,6 @@ function UnitTextInput({
     if (groupName === GroupName.feature && unitId)
       modifyFeatureInput(dispatch, e.target.value, inputKey, unitId)
   }
-
-  useEffect(() => {
-    if (groupName === GroupName.grid && isVideo !== undefined) {
-      isVideo ? setLabel(Label.url) : setLabel(Label.filename)
-    } else {
-      setLabel(capitalizedWord(inputKey))
-    }
-  }, [groupName, inputKey, isVideo])
 
   return (
     <TextField
