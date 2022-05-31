@@ -44,11 +44,15 @@ function UnitTitle({ children }: { children: ReactNode }) {
   return <Typography variant="h6">{children}</Typography>
 }
 
-function useLabel(groupName: string, inputKey: string, isVideo?: boolean) {
+function useLabel(
+  groupName: string,
+  inputKey: string,
+  isVideo: boolean = false
+) {
   const [label, setLabel] = useState<string>('')
 
   useEffect(() => {
-    if (groupName === GroupName.grid && isVideo !== undefined) {
+    if (groupName === GroupName.grid) {
       isVideo ? setLabel(Label.url) : setLabel(Label.filename)
     } else {
       setLabel(capitalizedWord(inputKey))

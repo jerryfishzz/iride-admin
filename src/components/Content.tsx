@@ -153,7 +153,7 @@ export default function Content() {
           <InputsProvider value={[inputs, inputsDispatch]}>
             <LoneInput title="Subtitle" />
             <GridImages />
-            {/* <Features /> */}
+            <Features />
             <LoneInput title="Fit" />
             <LoneInput title="Sizing" />
           </InputsProvider>

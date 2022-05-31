@@ -39,7 +39,7 @@ function splidId(id: string) {
 }
 
 function capitalizedWord(word: string) {
-  return word.charAt(0).toUpperCase + word.slice(1)
+  return word.charAt(0).toUpperCase() + word.slice(1)
 }
 
 export { createCtx, getKebabCase, createUniqId, splidId, capitalizedWord }
