@@ -1,5 +1,3 @@
-import { InputUnitType } from 'archive/components/InputUnit'
-import { InputsType } from 'context/inputs'
 import { createContext, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -44,41 +42,4 @@ function capitalizedWord(word: string) {
   return word.charAt(0).toUpperCase + word.slice(1)
 }
 
-enum GroupName {
-  grid = 'grid',
-  feature = 'feature',
-}
-
-function getInputUnitState(
-  state: InputsType,
-  groupName: GroupName,
-  order: string,
-  inputKey: string
-) {
-  const index = parseInt(order) - 1
-
-  switch (groupName) {
-    case GroupName.grid:
-      return {
-        inputUnitState: state.grid[`grid${order}`],
-        input: state.grid[`grid${order}`].isVideo
-          ? state.grid[`grid${order}`].url
-          : state.grid[`grid${order}`].filename,
-      }
-    case GroupName.feature:
-      return {
-        inputUnitState: state.featureSlides[index],
-        input: state.featureSlides[index][inputKey],
-      }
-  }
-}
-
-export {
-  createCtx,
-  getKebabCase,
-  createUniqId,
-  splidId,
-  getInputUnitState,
-  GroupName,
-  capitalizedWord,
-}
+export { createCtx, getKebabCase, createUniqId, splidId, capitalizedWord }

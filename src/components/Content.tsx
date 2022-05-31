@@ -15,6 +15,7 @@ import LoneInput from './LoneInput'
 import Features from './Features'
 import GridImages from './GridImages'
 import { InputsProvider, inputsReducer } from 'context/inputs'
+import { createUniqId } from 'utils/helper'
 
 const gridModel = {
   url: '',
@@ -28,7 +29,14 @@ const initialInputs = {
     grid2: { ...gridModel },
     grid3: { ...gridModel },
   },
-  featureSlides: [],
+  featureSlides: [
+    {
+      id: createUniqId(),
+      description: '',
+      filename: '',
+      heading: '',
+    },
+  ],
 }
 
 export default function Content() {

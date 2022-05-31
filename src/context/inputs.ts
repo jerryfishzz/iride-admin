@@ -1,4 +1,3 @@
-import { InputUnitType } from 'archive/components/InputUnit'
 import { Dispatch } from 'react'
 import { createCtx } from 'utils/helper'
 
@@ -12,7 +11,8 @@ interface GridImagesType {
   [key: string]: GridType
 }
 
-interface FeaturSlide extends InputUnitType {
+interface FeaturSlide {
+  id: string
   description: string
   filename: string
   heading: string
@@ -20,7 +20,7 @@ interface FeaturSlide extends InputUnitType {
 
 interface InputsType {
   grid: GridImagesType
-  featureSlides: FeaturSlide[] | []
+  featureSlides: FeaturSlide[]
 }
 
 enum ACTION_TYPE {
@@ -157,4 +157,4 @@ export {
   addFeature,
 }
 
-export type { FeaturSlide, InputsType }
+export type { FeaturSlide }

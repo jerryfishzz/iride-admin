@@ -13,28 +13,16 @@ import {
 } from 'context/inputs'
 import { InputUnitProvider, useInputUnit } from 'context/input-unit'
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react'
-import { capitalizedWord, GroupName, splidId } from 'utils/helper'
-
-enum ACTION_TYPE {
-  TOGGLE_VIDEO = 'TOGGLE_VIDEO',
-  MODIFY_INPUT = 'MODIFY_INPUT',
-}
-
-type Action =
-  | { type: ACTION_TYPE.TOGGLE_VIDEO; isVideo: boolean }
-  | { type: ACTION_TYPE.MODIFY_INPUT; input: string; key: string }
+import { capitalizedWord, splidId } from 'utils/helper'
 
 enum Label {
   filename = 'Filename',
   url = 'URL',
 }
 
-type InputUnitType = {
-  id: string
-  input?: string
-  isVideo?: boolean
-  label?: Label.filename | Label.url
-  [key: string]: string | boolean | (Label.filename | Label.url) | undefined
+enum GroupName {
+  grid = 'grid',
+  feature = 'feature',
 }
 
 function InputUnit({ children }: { children: ReactNode }) {
@@ -137,5 +125,4 @@ function UnitSwitch({ id, isVideo }: { id: string; isVideo: boolean }) {
   )
 }
 
-export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch, Label, ACTION_TYPE }
-export type { Action, InputUnitType }
+export { InputUnit, UnitTitle, UnitTextInput, UnitSwitch }
