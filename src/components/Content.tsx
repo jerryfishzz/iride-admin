@@ -17,6 +17,12 @@ import GridImages from './GridImages'
 import { InputsProvider, inputsReducer } from 'context/inputs'
 import { createUniqId } from 'utils/helper'
 
+enum LoneType {
+  subtitle,
+  fit,
+  sizing,
+}
+
 const gridModel = {
   url: '',
   isVideo: false,
@@ -37,6 +43,9 @@ const initialInputs = {
       heading: '',
     },
   ],
+  subtitle: '',
+  fit: '',
+  sizing: '',
 }
 
 export default function Content() {
@@ -151,11 +160,11 @@ export default function Content() {
           onSubmit={generateJSON}
         >
           <InputsProvider value={[inputs, inputsDispatch]}>
-            <LoneInput title="Subtitle" />
+            <LoneInput loneType={LoneType[0]} />
             <GridImages />
             <Features />
-            <LoneInput title="Fit" />
-            <LoneInput title="Sizing" />
+            <LoneInput loneType={LoneType[1]} />
+            <LoneInput loneType={LoneType[2]} />
           </InputsProvider>
 
           <Button type="submit" onClick={handleChangeContent}>

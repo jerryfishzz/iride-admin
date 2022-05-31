@@ -21,14 +21,18 @@ interface FeaturSlide {
 interface InputsType {
   grid: GridImagesType
   featureSlides: FeaturSlide[]
+  subtitle: string
+  fit: string
+  sizing: string
+  [key: string]: string | GridImagesType | FeaturSlide[]
 }
 
 enum ACTION_TYPE {
   TOGGLE_GRID_VIDEO = 'TOGGLE_GRID_VIDEO',
   MODIFY_GRID_INPUT = 'MODIFY_GRID_INPUT',
   MODIFY_FEATURE_INPUT = 'MODIFY_FEATURE_INPUT',
-  GET_INITIAL_FEATURE = 'GET_INITIAL_FEATURE',
   ADD_FEATURE = 'ADD_FEATURE',
+  MODIFY_LONE = 'MODIFY_LONE',
 }
 
 type Action =
@@ -41,6 +45,7 @@ type Action =
       id: string
     }
   | { type: ACTION_TYPE.ADD_FEATURE; newFeature: FeaturSlide }
+  | { type: ACTION_TYPE.MODIFY_LONE; loneType: string; input: string }
 
 const [useInputs, InputsProvider] = createCtx<[InputsType, Dispatch<Action>]>(
   '<InputsProvider />',
@@ -94,6 +99,11 @@ const inputsReducer = (state: InputsType, action: Action) => {
         ...state,
         featureSlides: [...state.featureSlides, action.newFeature],
       }
+    case ACTION_TYPE.MODIFY_LONE:
+      return {
+        ...state,
+        [action.loneType]: action.input,
+      }
     default:
       throw new Error('Unhandled action type')
   }
@@ -133,6 +143,14 @@ const addFeature = (dispatch: Dispatch<Action>, newFeature: FeaturSlide) => {
   dispatch({ type: ACTION_TYPE.ADD_FEATURE, newFeature })
 }
 
+const modifyLone = (
+  dispatch: Dispatch<Action>,
+  loneType: string,
+  input: string
+) => {
+  dispatch({ type: ACTION_TYPE.MODIFY_LONE, loneType, input })
+}
+
 export {
   useInputs,
   InputsProvider,
@@ -141,6 +159,5 @@ export {
   toggleGridVideo,
   modifyFeatureInput,
   addFeature,
+  modifyLone,
 }
-
-export type { FeaturSlide }

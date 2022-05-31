@@ -1,15 +1,16 @@
 import TextField from '@mui/material/TextField'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 import AccordionInput from './AccordionInput'
-import { getKebabCase } from 'utils/helper'
+import { capitalizedWord } from 'utils/helper'
+import { modifyLone, useInputs } from 'context/inputs'
 
-export default function LoneInput({ title }: { title: string }) {
-  const [input, setInput] = useState<string>('')
+export default function LoneInput({ loneType }: { loneType: string }) {
+  const [state, dispatch] = useInputs()
 
-  const kebabCaseTitle = getKebabCase(title)
+  const title = capitalizedWord(loneType)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
+    modifyLone(dispatch, loneType, e.target.value)
   }
 
   return (
@@ -17,11 +18,11 @@ export default function LoneInput({ title }: { title: string }) {
       title={title}
       details={
         <TextField
-          id={`${kebabCaseTitle}-textfield`}
+          id={`${loneType}-input`}
           label={title}
           variant="standard"
           fullWidth
-          value={input}
+          value={state[loneType]}
           onChange={handleChange}
         />
       }
