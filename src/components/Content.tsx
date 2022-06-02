@@ -16,12 +16,7 @@ import Features from './Features'
 import GridImages from './GridImages'
 import { InputsProvider, inputsReducer } from 'context/inputs'
 import { createUniqId } from 'utils/helper'
-
-enum LoneType {
-  subtitle,
-  fit,
-  sizing,
-}
+import { LoneType } from 'interfaces/inputs'
 
 const gridModel = {
   url: '',

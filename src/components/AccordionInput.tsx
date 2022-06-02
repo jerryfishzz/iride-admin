@@ -8,15 +8,13 @@ import {
 import { ReactNode } from 'react'
 import { getKebabCase } from 'utils/helper'
 
-interface AccordionInputProps {
-  title: string
-  details: ReactNode
-}
-
 export default function AccordionInput({
   title,
   details,
-}: AccordionInputProps) {
+}: {
+  title: string
+  details: ReactNode
+}) {
   const kebabCaseTitle = getKebabCase(title)
 
   return (

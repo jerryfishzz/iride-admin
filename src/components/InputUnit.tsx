@@ -14,16 +14,7 @@ import {
 import { InputUnitProvider, useInputUnit } from 'context/input-unit'
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react'
 import { capitalizedWord, splidId } from 'utils/helper'
-
-enum Label {
-  filename = 'Filename',
-  url = 'URL',
-}
-
-enum GroupName {
-  grid = 'grid',
-  feature = 'feature',
-}
+import { GroupName, Label } from 'interfaces/inputs'
 
 function InputUnit({ children }: { children: ReactNode }) {
   return (
