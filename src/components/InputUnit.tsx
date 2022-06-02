@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControlLabel,
   Switch,
   TextField,
@@ -30,9 +31,26 @@ function InputUnit({ children }: { children: ReactNode }) {
   )
 }
 
-function UnitTitle({ children }: { children: ReactNode }) {
+function UnitTitle({
+  showDelete = false,
+  children,
+}: {
+  showDelete?: boolean
+  children: ReactNode
+}) {
   useInputUnit('<UnitTitle />')
-  return <Typography variant="h6">{children}</Typography>
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <Typography variant="h6" sx={{ flex: 1 }}>
+        {children}
+      </Typography>
+      {showDelete && (
+        <Button variant="outlined" color="error" size="small">
+          Delete
+        </Button>
+      )}
+    </Box>
+  )
 }
 
 function useLabel(

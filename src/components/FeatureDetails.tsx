@@ -1,8 +1,5 @@
 import { Button } from '@mui/material'
-import {
-  useInputs,
-  addFeature,
-} from 'context/inputs'
+import { useInputs, addFeature } from 'context/inputs'
 import { createUniqId } from 'utils/helper'
 import { InputUnit, UnitTextInput, UnitTitle } from './InputUnit'
 
@@ -30,7 +27,7 @@ export default function FeatureDetails() {
 
           return (
             <InputUnit key={id}>
-              <UnitTitle>Feature {order}</UnitTitle>
+              <UnitTitle showDelete={true}>Feature {order}</UnitTitle>
               <UnitTextInput
                 id={`feature-${order}-filename`}
                 input={filename}
