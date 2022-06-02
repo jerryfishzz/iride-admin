@@ -46,6 +46,7 @@ enum ACTION_TYPE {
   MODIFY_GRID_INPUT = 'MODIFY_GRID_INPUT',
   MODIFY_FEATURE_INPUT = 'MODIFY_FEATURE_INPUT',
   ADD_FEATURE = 'ADD_FEATURE',
+  DELETE_FEATURE = 'DELETE_FEATURE',
   MODIFY_LONE = 'MODIFY_LONE',
 }
 
@@ -59,6 +60,7 @@ type Action =
       id: string
     }
   | { type: ACTION_TYPE.ADD_FEATURE; newFeature: FeaturSlide }
+  | { type: ACTION_TYPE.DELETE_FEATURE; id: string }
   | { type: ACTION_TYPE.MODIFY_LONE; loneType: string; input: string }
 
 export { LoneType, Label, GroupName, ACTION_TYPE }

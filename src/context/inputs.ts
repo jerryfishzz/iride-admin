@@ -54,6 +54,13 @@ const inputsReducer = (state: InputsType, action: Action) => {
         ...state,
         featureSlides: [...state.featureSlides, action.newFeature],
       }
+    case ACTION_TYPE.DELETE_FEATURE:
+      return {
+        ...state,
+        featureSlides: state.featureSlides.filter(
+          slide => slide.id !== action.id
+        ),
+      }
     case ACTION_TYPE.MODIFY_LONE:
       return {
         ...state,
@@ -98,6 +105,10 @@ const addFeature = (dispatch: Dispatch<Action>, newFeature: FeaturSlide) => {
   dispatch({ type: ACTION_TYPE.ADD_FEATURE, newFeature })
 }
 
+const deleteFeature = (dispatch: Dispatch<Action>, id: string) => {
+  dispatch({ type: ACTION_TYPE.DELETE_FEATURE, id })
+}
+
 const modifyLone = (
   dispatch: Dispatch<Action>,
   loneType: string,
@@ -115,4 +126,5 @@ export {
   modifyFeatureInput,
   addFeature,
   modifyLone,
+  deleteFeature,
 }

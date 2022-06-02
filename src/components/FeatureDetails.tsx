@@ -27,7 +27,9 @@ export default function FeatureDetails() {
 
           return (
             <InputUnit key={id}>
-              <UnitTitle showDelete={true}>Feature {order}</UnitTitle>
+              <UnitTitle showDelete={true} unitId={id}>
+                Feature {order}
+              </UnitTitle>
               <UnitTextInput
                 id={`feature-${order}-filename`}
                 input={filename}

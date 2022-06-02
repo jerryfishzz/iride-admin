@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material'
 import {
+  deleteFeature,
   modifyFeatureInput,
   modifyGridInput,
   toggleGridVideo,
@@ -32,20 +33,33 @@ function InputUnit({ children }: { children: ReactNode }) {
 }
 
 function UnitTitle({
+  unitId,
   showDelete = false,
   children,
 }: {
+  unitId?: string
   showDelete?: boolean
   children: ReactNode
 }) {
   useInputUnit('<UnitTitle />')
+  const [{ featureSlides }, dispatch] = useInputs()
+
+  const handleClick = () => {
+    unitId && deleteFeature(dispatch, unitId)
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Typography variant="h6" sx={{ flex: 1 }}>
         {children}
       </Typography>
-      {showDelete && (
-        <Button variant="outlined" color="error" size="small">
+      {showDelete && featureSlides.length > 1 && (
+        <Button
+          variant="outlined"
+          color="error"
+          size="small"
+          onClick={handleClick}
+        >
           Delete
         </Button>
       )}
