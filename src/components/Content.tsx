@@ -60,8 +60,11 @@ export default function Content() {
     e.preventDefault()
     console.log('submit')
 
-    // const elements = (e.target as HTMLFormElement).elements as FormElements
-    // console.log(elements.sizingTextField.value)
+    const elements = (e.target as HTMLFormElement)
+    console.log(elements.length)
+    for (let index = 0; index < elements.length; index++) {
+      console.log(elements[index])
+    }
   }
 
   return (
