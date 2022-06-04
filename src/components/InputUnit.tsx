@@ -96,20 +96,18 @@ function UnitTextInput({
   unitId?: string
   isVideo?: boolean
 }) {
+  const [textFieldValue, setTextFieldValue] = useState<string>('')
+
   const [groupName, order, inputKey] = splidId(id)
   const [label] = useLabel(groupName, inputKey, isVideo)
 
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  // if (groupName === GroupName.grid)
-  //   modifyGridInput(dispatch, groupName + order, e.target.value)
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTextFieldValue(e.target.value)
+  }
 
-  // if (groupName === GroupName.feature && unitId)
-  //   modifyFeatureInput(dispatch, e.target.value, inputKey, unitId)
-  // }
-
-  // useEffect(() => {
-
-  // })
+  useEffect(() => {
+    setTextFieldValue(input)
+  }, [input])
 
   return (
     <TextField
@@ -117,8 +115,8 @@ function UnitTextInput({
       label={label}
       variant="standard"
       fullWidth
-      // value={input}
-      // onChange={handleChange}
+      value={textFieldValue}
+      onChange={handleChange}
     />
   )
 }
