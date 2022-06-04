@@ -1,9 +1,26 @@
+import { Action, ACTION_TYPE, InputUnitType } from 'interfaces/input-unit'
+import { Dispatch } from 'react'
 import { createCtx } from 'utils/helper'
 
-// This is just a context to create the structure of input unit composite component. No data sharing.
-const [useInputUnit, InputUnitProvider] = createCtx<{}>(
-  '<InputUnitProvider />',
-  'InputUnitProvider'
-)
+const [useInputUnit, InputUnitProvider] = createCtx<
+  [InputUnitType, Dispatch<Action>]
+>('<InputUnitProvider />', 'InputUnitProvider')
 
-export { InputUnitProvider, useInputUnit }
+const inputUnitReducer = (state: InputUnitType, action: Action) => {
+  switch (action.type) {
+    case ACTION_TYPE.TOGGLE_VIDEO:
+      return {
+        isVideo: action.isVideo === undefined ? !state.isVideo : action.isVideo,
+      }
+    default:
+      throw new Error('Unhandled action type')
+  }
+}
+
+const toggleVideo = (dispatch: Dispatch<Action>, isVideo?: boolean) => {
+  isVideo === undefined
+    ? dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO })
+    : dispatch({ type: ACTION_TYPE.TOGGLE_VIDEO, isVideo })
+}
+
+export { InputUnitProvider, useInputUnit, inputUnitReducer, toggleVideo }

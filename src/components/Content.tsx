@@ -19,9 +19,9 @@ import { createUniqId } from 'utils/helper'
 import { LoneType } from 'interfaces/inputs'
 
 const gridModel = {
-  url: '',
-  isVideo: false,
-  filename: '',
+  url: 'hello',
+  isVideo: true,
+  filename: 'world',
 }
 
 const initialInputs = {

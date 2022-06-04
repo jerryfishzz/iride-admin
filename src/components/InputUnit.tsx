@@ -13,14 +13,24 @@ import {
   toggleGridVideo,
   useInputs,
 } from 'context/inputs'
-import { InputUnitProvider, useInputUnit } from 'context/input-unit'
-import { ChangeEvent, ReactNode, useEffect, useState } from 'react'
+import {
+  InputUnitProvider,
+  inputUnitReducer,
+  toggleVideo,
+  useInputUnit,
+} from 'context/input-unit'
+import { ChangeEvent, ReactNode, useEffect, useReducer, useState } from 'react'
 import { capitalizedWord, splidId } from 'utils/helper'
 import { GroupName, Label } from 'interfaces/inputs'
+import { InputUnitType } from 'interfaces/input-unit'
+
+const initialInputUnit: InputUnitType = { isVideo: false }
 
 function InputUnit({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(inputUnitReducer, initialInputUnit)
+
   return (
-    <InputUnitProvider value={{}}>
+    <InputUnitProvider value={[state, dispatch]}>
       <Box
         sx={{
           my: 2,
@@ -121,15 +131,18 @@ function UnitTextInput({
   )
 }
 
-function UnitSwitch({ id, isVideo }: { id: string; isVideo: boolean }) {
-  useInputUnit('<UnitSwitch />')
-  const [, dispatch] = useInputs('<UnitSwitch />')
+function UnitSwitch({ id, isVideo: inputsIsVideo }: { id: string; isVideo: boolean }) {
+  const [{ isVideo }, dispatch] = useInputUnit('<UnitSwitch />')
 
   const [groupName, order] = splidId(id)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    toggleGridVideo(dispatch, groupName + order, e.target.checked)
+    toggleVideo(dispatch)
   }
+
+  useEffect(() => {
+    toggleVideo(dispatch, inputsIsVideo)
+  }, [dispatch, inputsIsVideo])
 
   return (
     <Box
