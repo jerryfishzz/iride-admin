@@ -21,7 +21,6 @@ export default function GridDetails() {
             <UnitTextInput
               id={`grid-${order}-input`}
               input={isVideo ? url : filename}
-              isVideo={isVideo}
             />
             {index > 0 && (
               <UnitSwitch id={`grid-${order}-video`} isVideo={isVideo} />

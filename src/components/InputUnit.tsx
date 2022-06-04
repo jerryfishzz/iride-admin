@@ -99,13 +99,12 @@ function UnitTextInput({
   id,
   input,
   unitId,
-  isVideo,
 }: {
   id: string
   input: string
   unitId?: string
-  isVideo?: boolean
 }) {
+  const [{ isVideo }] = useInputUnit('<UnitTextInput />')
   const [textFieldValue, setTextFieldValue] = useState<string>('')
 
   const [groupName, order, inputKey] = splidId(id)
@@ -131,7 +130,13 @@ function UnitTextInput({
   )
 }
 
-function UnitSwitch({ id, isVideo: inputsIsVideo }: { id: string; isVideo: boolean }) {
+function UnitSwitch({
+  id,
+  isVideo: inputsIsVideo,
+}: {
+  id: string
+  isVideo: boolean
+}) {
   const [{ isVideo }, dispatch] = useInputUnit('<UnitSwitch />')
 
   const [groupName, order] = splidId(id)

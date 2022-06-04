@@ -20,7 +20,7 @@ import { LoneType } from 'interfaces/inputs'
 
 const gridModel = {
   url: 'hello',
-  isVideo: true,
+  isVideo: false,
   filename: 'world',
 }
 
