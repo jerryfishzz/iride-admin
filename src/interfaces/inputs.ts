@@ -1,7 +1,7 @@
 enum LoneType {
-  subtitle,
-  fit,
-  sizing,
+  subtitle = 'subtitle',
+  fit = 'fit',
+  sizing = 'sizing',
 }
 
 enum Label {

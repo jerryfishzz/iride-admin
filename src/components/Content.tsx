@@ -60,7 +60,7 @@ export default function Content() {
     e.preventDefault()
     console.log('submit')
 
-    const elements = (e.target as HTMLFormElement)
+    const elements = e.target as HTMLFormElement
     console.log(elements.length)
     for (let index = 0; index < elements.length; index++) {
       console.log(elements[index])
@@ -158,11 +158,11 @@ export default function Content() {
           onSubmit={generateJSON}
         >
           <InputsProvider value={[inputs, inputsDispatch]}>
-            <LoneInput input={inputs.subtitle} loneType={LoneType[0]} />
+            <LoneInput input={inputs.subtitle} loneType={LoneType.subtitle} />
             <GridImages />
             <Features />
-            <LoneInput input={inputs.fit} loneType={LoneType[1]} />
-            <LoneInput input={inputs.sizing} loneType={LoneType[2]} />
+            <LoneInput input={inputs.fit} loneType={LoneType.fit} />
+            <LoneInput input={inputs.sizing} loneType={LoneType.sizing} />
           </InputsProvider>
 
           <Button type="submit" onClick={handleChangeContent}>

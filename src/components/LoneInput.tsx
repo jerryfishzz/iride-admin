@@ -12,7 +12,7 @@ export default function LoneInput({
 }) {
   const [textFieldValue, setTextFieldValue] = useTextField(input)
 
-  const title = capitalizedWord(loneType)
+  const label = capitalizedWord(loneType)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTextFieldValue(e.target.value)
@@ -20,11 +20,11 @@ export default function LoneInput({
 
   return (
     <AccordionInput
-      title={title}
+      title={loneType}
       details={
         <TextField
           id={`${loneType}-input`}
-          label={title}
+          label={label}
           variant="standard"
           fullWidth
           value={textFieldValue}
