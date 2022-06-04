@@ -6,13 +6,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import {
-  deleteFeature,
-  modifyFeatureInput,
-  modifyGridInput,
-  toggleGridVideo,
-  useInputs,
-} from 'context/inputs'
+import { deleteFeature, useInputs } from 'context/inputs'
 import {
   InputUnitProvider,
   inputUnitReducer,
@@ -107,7 +101,7 @@ function UnitTextInput({
   const [{ isVideo }] = useInputUnit('<UnitTextInput />')
   const [textFieldValue, setTextFieldValue] = useState<string>('')
 
-  const [groupName, order, inputKey] = splidId(id)
+  const [groupName, , inputKey] = splidId(id)
   const [label] = useLabel(groupName, inputKey, isVideo)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -139,8 +133,6 @@ function UnitSwitch({
 }) {
   const [{ isVideo }, dispatch] = useInputUnit('<UnitSwitch />')
 
-  const [groupName, order] = splidId(id)
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     toggleVideo(dispatch)
   }
@@ -158,6 +150,7 @@ function UnitSwitch({
       <FormControlLabel
         control={
           <Switch
+            id={id}
             checked={isVideo}
             onChange={handleChange}
             inputProps={{ 'aria-label': 'controlled' }}
