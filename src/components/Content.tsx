@@ -19,9 +19,9 @@ import { createUniqId } from 'utils/helper'
 import { LoneType } from 'interfaces/inputs'
 
 const gridModel = {
-  url: 'hello',
+  url: '',
   isVideo: false,
-  filename: 'world',
+  filename: '',
 }
 
 const initialInputs = {
@@ -38,9 +38,9 @@ const initialInputs = {
       heading: '',
     },
   ],
-  subtitle: '',
-  fit: '',
-  sizing: '',
+  subtitle: 'Hello',
+  fit: 'the',
+  sizing: 'world',
 }
 
 export default function Content() {
@@ -158,11 +158,11 @@ export default function Content() {
           onSubmit={generateJSON}
         >
           <InputsProvider value={[inputs, inputsDispatch]}>
-            <LoneInput loneType={LoneType[0]} />
+            <LoneInput input={inputs.subtitle} loneType={LoneType[0]} />
             <GridImages />
             <Features />
-            <LoneInput loneType={LoneType[1]} />
-            <LoneInput loneType={LoneType[2]} />
+            <LoneInput input={inputs.fit} loneType={LoneType[1]} />
+            <LoneInput input={inputs.sizing} loneType={LoneType[2]} />
           </InputsProvider>
 
           <Button type="submit" onClick={handleChangeContent}>
