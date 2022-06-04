@@ -21,7 +21,7 @@ import { LoneType } from 'interfaces/inputs'
 const gridModel = {
   url: '',
   isVideo: false,
-  filename: '',
+  filename: 'hey',
 }
 
 const initialInputs = {
@@ -33,9 +33,9 @@ const initialInputs = {
   featureSlides: [
     {
       id: createUniqId(),
-      description: '',
-      filename: '',
-      heading: '',
+      description: 'say',
+      filename: 'my',
+      heading: 'name',
     },
   ],
   subtitle: 'Hello',

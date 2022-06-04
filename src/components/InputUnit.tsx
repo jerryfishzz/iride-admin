@@ -14,7 +14,7 @@ import {
   useInputUnit,
 } from 'context/input-unit'
 import { ChangeEvent, ReactNode, useEffect, useReducer, useState } from 'react'
-import { capitalizedWord, splidId } from 'utils/helper'
+import { capitalizedWord, splidId, useTextField } from 'utils/helper'
 import { GroupName, Label } from 'interfaces/inputs'
 import { InputUnitType } from 'interfaces/input-unit'
 
@@ -99,7 +99,7 @@ function UnitTextInput({
   unitId?: string
 }) {
   const [{ isVideo }] = useInputUnit('<UnitTextInput />')
-  const [textFieldValue, setTextFieldValue] = useState<string>('')
+  const [textFieldValue, setTextFieldValue] = useTextField(input)
 
   const [groupName, , inputKey] = splidId(id)
   const [label] = useLabel(groupName, inputKey, isVideo)
@@ -107,10 +107,6 @@ function UnitTextInput({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTextFieldValue(e.target.value)
   }
-
-  useEffect(() => {
-    setTextFieldValue(input)
-  }, [input])
 
   return (
     <TextField
@@ -120,7 +116,7 @@ function UnitTextInput({
       fullWidth
       value={textFieldValue}
       onChange={handleChange}
-      inputProps={{'data-unit-id': unitId ? unitId : ''}}
+      inputProps={{ 'data-unit-id': unitId ? unitId : '' }}
     />
   )
 }

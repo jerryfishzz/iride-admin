@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 // Helper function to create a context without needing to give a default value as the parameter to createContext.
@@ -42,4 +42,21 @@ function capitalizedWord(word: string) {
   return word.charAt(0).toUpperCase() + word.slice(1)
 }
 
-export { createCtx, getKebabCase, createUniqId, splidId, capitalizedWord }
+function useTextField(input: string) {
+  const [textFieldValue, setTextFieldValue] = useState<string>('')
+
+  useEffect(() => {
+    setTextFieldValue(input)
+  }, [input])
+
+  return [textFieldValue, setTextFieldValue] as const
+}
+
+export {
+  createCtx,
+  getKebabCase,
+  createUniqId,
+  splidId,
+  capitalizedWord,
+  useTextField,
+}
