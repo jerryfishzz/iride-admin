@@ -66,6 +66,8 @@ const inputsReducer = (state: InputsType, action: Action) => {
         ...state,
         [action.loneType]: action.input,
       }
+    case ACTION_TYPE.PROCESS_SUBMIT:
+      return action.newState
     default:
       throw new Error('Unhandled action type')
   }
@@ -117,6 +119,10 @@ const modifyLone = (
   dispatch({ type: ACTION_TYPE.MODIFY_LONE, loneType, input })
 }
 
+const processSubmit = (dispatch: Dispatch<Action>, newState: InputsType) => {
+  dispatch({ type: ACTION_TYPE.PROCESS_SUBMIT, newState })
+}
+
 export {
   useInputs,
   InputsProvider,
@@ -127,4 +133,5 @@ export {
   addFeature,
   modifyLone,
   deleteFeature,
+  processSubmit,
 }

@@ -14,7 +14,7 @@ import { Box } from '@mui/material'
 import LoneInput from './LoneInput'
 import Features from './Features'
 import GridImages from './GridImages'
-import { InputsProvider, inputsReducer } from 'context/inputs'
+import { InputsProvider, inputsReducer, processSubmit } from 'context/inputs'
 import { createUniqId, handleSubmitData } from 'utils/helper'
 import { GroupName } from 'interfaces/inputs'
 
@@ -63,6 +63,8 @@ export default function Content() {
     const elements = (e.target as HTMLFormElement).elements
     const newState = handleSubmitData(inputs, elements)
     console.log(newState)
+
+    processSubmit(inputsDispatch, newState)
   }
 
   return (

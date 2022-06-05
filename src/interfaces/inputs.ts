@@ -52,6 +52,7 @@ enum ACTION_TYPE {
   ADD_FEATURE = 'ADD_FEATURE',
   DELETE_FEATURE = 'DELETE_FEATURE',
   MODIFY_LONE = 'MODIFY_LONE',
+  PROCESS_SUBMIT = 'PROCESS_SUBMIT',
 }
 
 type Action =
@@ -66,6 +67,7 @@ type Action =
   | { type: ACTION_TYPE.ADD_FEATURE; newFeature: FeaturSlide }
   | { type: ACTION_TYPE.DELETE_FEATURE; id: string }
   | { type: ACTION_TYPE.MODIFY_LONE; loneType: string; input: string }
+  | { type: ACTION_TYPE.PROCESS_SUBMIT; newState: InputsType }
 
 export { Label, GroupName, ACTION_TYPE }
 export type { GridImagesType, FeaturSlide, InputsType, Action }
