@@ -116,7 +116,15 @@ function UnitTextInput({
       fullWidth
       value={textFieldValue}
       onChange={handleChange}
-      inputProps={{ 'data-unit-id': unitId ? unitId : '' }}
+      inputProps={{
+        'data-unit-id': unitId ? unitId : '',
+        'data-grid-input':
+          groupName === GroupName.grid
+            ? isVideo
+              ? Label.url
+              : Label.filename
+            : '',
+      }}
     />
   )
 }

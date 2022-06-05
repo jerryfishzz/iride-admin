@@ -15,8 +15,9 @@ import LoneInput from './LoneInput'
 import Features from './Features'
 import GridImages from './GridImages'
 import { InputsProvider, inputsReducer } from 'context/inputs'
-import { createUniqId } from 'utils/helper'
-import { LoneType } from 'interfaces/inputs'
+import { createUniqId, handleSubmitData } from 'utils/helper'
+import { GroupName } from 'interfaces/inputs'
+import { UnitInputElement } from 'interfaces/input-unit'
 
 const gridModel = {
   url: '',
@@ -60,11 +61,16 @@ export default function Content() {
     e.preventDefault()
     console.log('submit')
 
-    const elements = e.target as HTMLFormElement
-    console.log(elements.length)
+    const elements = (e.target as HTMLFormElement).elements
+    let indexedElements: UnitInputElement[] = []
     for (let index = 0; index < elements.length; index++) {
-      console.log(elements[index])
+      indexedElements.push(elements[index] as UnitInputElement)
     }
+
+    console.log(indexedElements)
+
+    const newState = handleSubmitData(inputs, indexedElements)
+    console.log(newState)
   }
 
   return (
@@ -158,11 +164,11 @@ export default function Content() {
           onSubmit={generateJSON}
         >
           <InputsProvider value={[inputs, inputsDispatch]}>
-            <LoneInput input={inputs.subtitle} loneType={LoneType.subtitle} />
+            <LoneInput input={inputs.subtitle} loneType={GroupName.subtitle} />
             <GridImages />
             <Features />
-            <LoneInput input={inputs.fit} loneType={LoneType.fit} />
-            <LoneInput input={inputs.sizing} loneType={LoneType.sizing} />
+            <LoneInput input={inputs.fit} loneType={GroupName.fit} />
+            <LoneInput input={inputs.sizing} loneType={GroupName.sizing} />
           </InputsProvider>
 
           <Button type="submit" onClick={handleChangeContent}>

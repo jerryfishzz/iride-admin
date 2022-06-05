@@ -1,8 +1,8 @@
-enum LoneType {
-  subtitle = 'subtitle',
-  fit = 'fit',
-  sizing = 'sizing',
-}
+// enum LoneType {
+//   subtitle = 'subtitle',
+//   fit = 'fit',
+//   sizing = 'sizing',
+// }
 
 enum Label {
   filename = 'Filename',
@@ -13,6 +13,9 @@ enum Label {
 enum GroupName {
   grid = 'grid',
   feature = 'feature',
+  subtitle = 'subtitle',
+  sizing = 'sizing',
+  fit = 'fit',
 }
 
 interface GridType {
@@ -30,6 +33,7 @@ interface FeaturSlide {
   description: string
   filename: string
   heading: string
+  [key: string]: string
 }
 
 interface InputsType {
@@ -63,5 +67,5 @@ type Action =
   | { type: ACTION_TYPE.DELETE_FEATURE; id: string }
   | { type: ACTION_TYPE.MODIFY_LONE; loneType: string; input: string }
 
-export { LoneType, Label, GroupName, ACTION_TYPE }
+export { Label, GroupName, ACTION_TYPE }
 export type { GridImagesType, FeaturSlide, InputsType, Action }

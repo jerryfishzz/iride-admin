@@ -1,3 +1,5 @@
+import { UnitInputElement } from 'interfaces/input-unit'
+import { GroupName, InputsType, Label } from 'interfaces/inputs'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -34,7 +36,7 @@ function createUniqId() {
   return id
 }
 
-function splidId(id: string) {
+function splidId(id: string): string[] {
   return id.split('-')
 }
 
@@ -52,6 +54,84 @@ function useTextField(input: string) {
   return [textFieldValue, setTextFieldValue] as const
 }
 
+function handleSubmitData(
+  state: InputsType,
+  data: UnitInputElement[]
+): InputsType {
+  let newState = { ...state }
+
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index]
+
+    if (element.nodeName === 'BUTTON') continue
+
+    const value = element.value
+    const [groupName, order, inputKey] = splidId(element.id)
+
+    switch (groupName) {
+      case GroupName.grid:
+        element.type === 'text'
+          ? element.dataset.gridInput === Label.filename
+            ? (newState = {
+                ...newState,
+                grid: {
+                  ...newState.grid,
+                  [`${groupName}${order}`]: {
+                    ...newState.grid[`${groupName}${order}`],
+                    filename: value,
+                  },
+                },
+              })
+            : (newState = {
+                ...newState,
+                grid: {
+                  ...newState.grid,
+                  [`${groupName}${order}`]: {
+                    ...newState.grid[`${groupName}${order}`],
+                    url: value,
+                  },
+                },
+              })
+          : (newState = {
+              ...newState,
+              grid: {
+                ...newState.grid,
+                [`${groupName}${order}`]: {
+                  ...newState.grid[`${groupName}${order}`],
+                  isVideo: element.checked,
+                },
+              },
+            })
+        break
+      case GroupName.feature:
+        newState = {
+          ...newState,
+          featureSlides: newState.featureSlides.map((feature, index) => {
+            if (index === parseInt(order) - 1)
+              return {
+                ...feature,
+                [inputKey]: value,
+              }
+            return feature
+          }),
+        }
+        break
+      case GroupName.subtitle:
+      case GroupName.fit:
+      case GroupName.sizing:
+        newState = {
+          ...newState,
+          [groupName]: value,
+        }
+        break
+      default:
+        throw Error('Unknown data type')
+    }
+  }
+
+  return newState
+}
+
 export {
   createCtx,
   getKebabCase,
@@ -59,4 +139,5 @@ export {
   splidId,
   capitalizedWord,
   useTextField,
+  handleSubmitData,
 }
