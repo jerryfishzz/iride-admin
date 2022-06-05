@@ -56,12 +56,12 @@ function useTextField(input: string) {
 
 function handleSubmitData(
   state: InputsType,
-  data: UnitInputElement[]
+  elements: HTMLFormControlsCollection
 ): InputsType {
   let newState = { ...state }
 
-  for (let index = 0; index < data.length; index++) {
-    const element = data[index]
+  for (let index = 0; index < elements.length; index++) {
+    const element = elements[index] as UnitInputElement
 
     if (element.nodeName === 'BUTTON') continue
 
@@ -125,7 +125,7 @@ function handleSubmitData(
         }
         break
       default:
-        throw Error('Unknown data type')
+        throw Error('Unknown element')
     }
   }
 

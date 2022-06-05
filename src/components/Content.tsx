@@ -17,7 +17,6 @@ import GridImages from './GridImages'
 import { InputsProvider, inputsReducer } from 'context/inputs'
 import { createUniqId, handleSubmitData } from 'utils/helper'
 import { GroupName } from 'interfaces/inputs'
-import { UnitInputElement } from 'interfaces/input-unit'
 
 const gridModel = {
   url: '',
@@ -62,14 +61,7 @@ export default function Content() {
     console.log('submit')
 
     const elements = (e.target as HTMLFormElement).elements
-    let indexedElements: UnitInputElement[] = []
-    for (let index = 0; index < elements.length; index++) {
-      indexedElements.push(elements[index] as UnitInputElement)
-    }
-
-    console.log(indexedElements)
-
-    const newState = handleSubmitData(inputs, indexedElements)
+    const newState = handleSubmitData(inputs, elements)
     console.log(newState)
   }
 
